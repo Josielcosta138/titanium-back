@@ -1,0 +1,15 @@
+
+
+server:
+  port: 8085
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce-lux
+    username: postgres
+    password: admin
+    driverClassName: org.postgresql.Driver
