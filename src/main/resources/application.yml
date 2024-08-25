@@ -9,7 +9,10 @@ spring:
       ddl-auto: update
     show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/ecommerce-lux
+    url: jdbc:postgresql://localhost:5432/titanium
     username: postgres
     password: admin
     driverClassName: org.postgresql.Driver
+  mvc:
+    consumes: application/json
+    produces: application/json
