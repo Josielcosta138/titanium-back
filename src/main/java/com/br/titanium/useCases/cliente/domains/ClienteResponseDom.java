@@ -4,11 +4,12 @@ package com.br.titanium.useCases.cliente.domains;
 public class ClienteResponseDom {
 
     private Long id;
-    private String razaoSocial;
-    private String nomeFantasia;
+    private String nome;
+    private String fantasia;
     private String email;
     private String telefone;
     private String cnpj;
+
 
     public Long getId() {
         return id;
@@ -18,20 +19,20 @@ public class ClienteResponseDom {
         this.id = id;
     }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
+    public String getNome() {
+        return nome;
     }
 
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getFantasia() {
+        return fantasia;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setFantasia(String fantasia) {
+        this.fantasia = fantasia;
     }
 
     public String getEmail() {
