@@ -33,22 +33,11 @@ public class OrdemServico {
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
-
-    //ordem de serviço pode estar associada a várias matérias-primas.
-    //essa sugestão de relacionamento bi-direcional foi uma sugestão pelo roberto
-    //aplicada para grades tmb
-    @ManyToMany
-    @JoinTable(
-            name = "ordem_servico_materia_prima",
-            joinColumns = @JoinColumn(name = "ordem_servico_id"),
-            inverseJoinColumns = @JoinColumn(name = "materia_prima_id")
-    )
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MateriaPrima> materiasPrimas;
 
-    @ManyToOne
-    @JoinColumn(name = "grade_id")
-    private Grade grade;
-
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GradeMateriaPrima> gradeMateriaPrimaList;
 
     public Long getId() {
         return id;
@@ -138,11 +127,11 @@ public class OrdemServico {
         this.materiasPrimas = materiasPrimas;
     }
 
-    public Grade getGrade() {
-        return grade;
+    public List<GradeMateriaPrima> getGradeMateriaPrimaList() {
+        return gradeMateriaPrimaList;
     }
 
-    public void setGrade(Grade grade) {
-        this.grade = grade;
+    public void setGradeMateriaPrimaList(List<GradeMateriaPrima> gradeMateriaPrimaList) {
+        this.gradeMateriaPrimaList = gradeMateriaPrimaList;
     }
 }
