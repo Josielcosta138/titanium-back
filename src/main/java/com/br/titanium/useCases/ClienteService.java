@@ -5,7 +5,11 @@ import com.br.titanium.repositorys.ClienteRepository;
 import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +31,8 @@ public class ClienteService {
             ClienteResponseDom aux = new ClienteResponseDom();
             aux.setId(resultadoClientes.getId());
             aux.setCnpj(resultadoClientes.getCnpj());
-            aux.setNomeFantasia(resultadoClientes.getNomeFantasia());
-            aux.setRazaoSocial( resultadoClientes.getRazaoSocial());
+            aux.setFantasia(resultadoClientes.getNomeFantasia());
+            aux.setNome( resultadoClientes.getRazaoSocial());
             aux.setEmail(resultadoClientes.getEmail());
             aux.setTelefone(resultadoClientes.getTelefone());
 
@@ -50,14 +54,46 @@ public class ClienteService {
             responseDOM.setId(clientes.getId());
             responseDOM.setCnpj(clientes.getCnpj());
             responseDOM.setEmail(clientes.getEmail());
-            responseDOM.setNomeFantasia(clientes.getNomeFantasia());
-            responseDOM.setRazaoSocial(clientes.getRazaoSocial());
+            responseDOM.setFantasia(clientes.getNomeFantasia());
+            responseDOM.setNome(clientes.getRazaoSocial());
             responseDOM.setTelefone(clientes.getTelefone());
 
             return responseDOM;
         }
         return null;
     }
+
+
+
+
+    private static final String API_URL = "https://www.receitaws.com.br/v1/cnpj/";
+
+    public ClienteResponseDom carregarClienteApi(String cnpj) {
+        try {
+            // Realiza a chamada à API externa
+            RestTemplate restTemplate = new RestTemplate();
+            String url = API_URL + cnpj;
+            ResponseEntity<ClienteResponseDom> response = restTemplate.getForEntity(url, ClienteResponseDom.class);
+
+            if (response.getStatusCode() == HttpStatus.OK) {
+                ClienteResponseDom apiResponse = response.getBody();
+
+                    ClienteResponseDom responseDOM = new ClienteResponseDom();
+                    responseDOM.setCnpj(apiResponse.getCnpj());
+                    responseDOM.setEmail(apiResponse.getEmail());
+                    responseDOM.setFantasia(apiResponse.getFantasia());
+                    responseDOM.setNome(apiResponse.getNome());
+                    responseDOM.setTelefone(apiResponse.getTelefone());
+
+                return responseDOM;
+            }
+
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
 
@@ -68,8 +104,8 @@ public class ClienteService {
             }
 
         Cliente clienteEntidades = new Cliente();
-            clienteEntidades.setRazaoSocial(cliente.getRazaoSocial());
-            clienteEntidades.setNomeFantasia(cliente.getNomeFantasia());
+            clienteEntidades.setRazaoSocial(cliente.getNome());
+            clienteEntidades.setNomeFantasia(cliente.getFantasia());
             clienteEntidades.setEmail(cliente.getEmail());
             clienteEntidades.setTelefone(cliente.getTelefone());
             clienteEntidades.setCnpj(cliente.getCnpj());
@@ -77,8 +113,8 @@ public class ClienteService {
 
         ClienteResponseDom responseDom = new ClienteResponseDom();
             responseDom.setId(resultado.getId());
-            responseDom.setRazaoSocial(resultado.getRazaoSocial());
-            responseDom.setNomeFantasia(resultado.getNomeFantasia());
+            responseDom.setNome(resultado.getRazaoSocial());
+            responseDom.setFantasia(resultado.getNomeFantasia());
             responseDom.setEmail(resultado.getEmail());
             responseDom.setTelefone(resultado.getTelefone());
             responseDom.setCnpj(resultado.getCnpj());
@@ -90,8 +126,8 @@ public class ClienteService {
 
     public ClienteResponseDom atualizarCliente(Long id, ClienteResponseDom cliente){
         Optional<Cliente> resultado = clienteRepository.findById(id).map(record -> {
-            record.setRazaoSocial(cliente.getRazaoSocial());
-            record.setNomeFantasia(cliente.getNomeFantasia());
+            record.setRazaoSocial(cliente.getNome());
+            record.setNomeFantasia(cliente.getFantasia());
             record.setEmail(cliente.getEmail());
             record.setTelefone(cliente.getTelefone());
             record.setCnpj(cliente.getCnpj());
@@ -104,8 +140,8 @@ public class ClienteService {
 
             ClienteResponseDom responseDOM = new ClienteResponseDom();
             responseDOM.setId(clientesEntidades.getId());
-            responseDOM.setRazaoSocial(clientesEntidades.getRazaoSocial());
-            responseDOM.setNomeFantasia(clientesEntidades.getNomeFantasia());
+            responseDOM.setNome(clientesEntidades.getRazaoSocial());
+            responseDOM.setFantasia(clientesEntidades.getNomeFantasia());
             responseDOM.setEmail(clientesEntidades.getEmail());
             responseDOM.setTelefone(clientesEntidades.getTelefone());
             responseDOM.setCnpj(clientesEntidades.getCnpj());
@@ -130,7 +166,7 @@ public class ClienteService {
             mensagens.add("cnpj do cliente não informado");
         }
 
-        if (cliente.getRazaoSocial() == null || cliente.getRazaoSocial().equals("")) {
+        if (cliente.getNome() == null || cliente.getNome().equals("")) {
             mensagens.add("nome do cliente não informado");
         }
         return mensagens;

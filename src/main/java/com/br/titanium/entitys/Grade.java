@@ -2,6 +2,7 @@ package com.br.titanium.entitys;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -10,13 +11,11 @@ public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = true)
+    private String idenficacaograde;
 
-    @ElementCollection
-    @CollectionTable(name = "grade_tamanhos", joinColumns = @JoinColumn(name = "grade_id"))
-    @MapKeyJoinColumn(name = "tamanho_id")
-    @Column(name = "quantidade")
-    private Map<Tamanho, Integer> tamanhosQuantidades; // Mapeia o Tamanho à Quantidade
-
+    @OneToMany(mappedBy = "tamanhoGrade", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GradeMateriaPrima> gradeMateriaPrimaList;
 
     public Long getId() {
         return id;
@@ -26,11 +25,20 @@ public class Grade {
         this.id = id;
     }
 
-    public Map<Tamanho, Integer> getTamanhosQuantidades() {
-        return tamanhosQuantidades;
+    public String getIdenficacaograde() {
+        return idenficacaograde;
     }
 
-    public void setTamanhosQuantidades(Map<Tamanho, Integer> tamanhosQuantidades) {
-        this.tamanhosQuantidades = tamanhosQuantidades;
+    public void setIdenficacaograde(String idenficacaograde) {
+        this.idenficacaograde = idenficacaograde;
+    }
+
+
+    public List<GradeMateriaPrima> getGradeMateriaPrimaList() {
+        return gradeMateriaPrimaList;
+    }
+
+    public void setGradeMateriaPrimaList(List<GradeMateriaPrima> gradeMateriaPrimaList) {
+        this.gradeMateriaPrimaList = gradeMateriaPrimaList;
     }
 }

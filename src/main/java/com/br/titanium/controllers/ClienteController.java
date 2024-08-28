@@ -55,6 +55,23 @@ public class ClienteController {
 
 
 
+    @GetMapping("/carregarDadosApis/{cnpj}")
+    public ResponseEntity<ClienteResponseDom> carregarClientesViaApi(@PathVariable String cnpj) {
+        try {
+            ClienteResponseDom responseDOM = clienteService.carregarClienteApi(cnpj);
+            if (responseDOM != null) {
+                return ResponseEntity.ok(responseDOM);
+            }
+            return ResponseEntity.status(204).body(null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
+
     @PostMapping(value = "/criarClientes", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarCliente(@RequestBody ClienteResponseDom cliente){
         try {
@@ -70,6 +87,9 @@ public class ClienteController {
             return ResponseEntity.badRequest().body(ResponseUtil.responseMap("Erro não mapeado"+ e.getMessage()));
         }
     }
+
+
+
 
 
     @PutMapping("/atualizarCliente/{id}")
