@@ -23,9 +23,6 @@ public class MateriaPrima {
     private String codReferencia;
 
 
-    @ManyToOne
-    @JoinColumn(name = "ordem_servico_id", nullable = false)
-    private OrdemServico ordemServico;
 
     @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeMateriaPrima> gradeMateriaPrimaList;
@@ -78,13 +75,6 @@ public class MateriaPrima {
         this.codReferencia = codReferencia;
     }
 
-    public OrdemServico getOrdemServico() {
-        return ordemServico;
-    }
-
-    public void setOrdemServico(OrdemServico ordemServico) {
-        this.ordemServico = ordemServico;
-    }
 
     public List<GradeMateriaPrima> getGradeMateriaPrimaList() {
         return gradeMateriaPrimaList;
