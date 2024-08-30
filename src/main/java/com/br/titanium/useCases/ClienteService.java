@@ -3,6 +3,7 @@ package com.br.titanium.useCases;
 import com.br.titanium.entitys.Cliente;
 import com.br.titanium.repositorys.ClienteRepository;
 import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
+import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,10 +81,15 @@ public class ClienteService {
 
                     ClienteResponseDom responseDOM = new ClienteResponseDom();
                     responseDOM.setCnpj(apiResponse.getCnpj());
-                    responseDOM.setEmail(apiResponse.getEmail());
-                    responseDOM.setFantasia(apiResponse.getFantasia());
                     responseDOM.setNome(apiResponse.getNome());
+                    responseDOM.setFantasia(apiResponse.getFantasia());
+                    responseDOM.setEmail(apiResponse.getEmail());
                     responseDOM.setTelefone(apiResponse.getTelefone());
+                    responseDOM.setLogradouro(apiResponse.getLogradouro());
+                    responseDOM.setBairro(apiResponse.getBairro());
+                    responseDOM.setMunicipio(apiResponse.getMunicipio());
+                    responseDOM.setUf(apiResponse.getUf());
+
 
                 return responseDOM;
             }
