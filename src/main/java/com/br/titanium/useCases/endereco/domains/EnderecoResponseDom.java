@@ -2,6 +2,7 @@ package com.br.titanium.useCases.endereco.domains;
 
 import com.br.titanium.entitys.Cidade;
 import com.br.titanium.entitys.Cliente;
+import com.br.titanium.entitys.Endereco;
 
 public class EnderecoResponseDom {
 
@@ -10,8 +11,24 @@ public class EnderecoResponseDom {
     private String bairro;
     private Long clienteId;
     private Long cidadeId;
+    private Cliente client;
+    private Cidade cidades;
 
+    public Cliente getClient() {
+        return client;
+    }
 
+    public void setClient(Cliente client) {
+        this.client = client;
+    }
+
+    public Cidade getCidades() {
+        return cidades;
+    }
+
+    public void setCidades(Cidade cidades) {
+        this.cidades = cidades;
+    }
 
     public Long getId() {
         return id;

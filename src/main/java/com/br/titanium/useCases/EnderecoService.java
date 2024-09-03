@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +40,8 @@ public class EnderecoService {
             aux.setBairro(dadoResultado.getBairro());
             aux.setCidadeId(dadoResultado.getCidade().getId());
             aux.setClienteId(dadoResultado.getCliente().getId());
+            aux.setClient(dadoResultado.getCliente());
+            aux.setCidades(dadoResultado.getCidade());
 
             listaDeEnderecos.add(aux);
         }
@@ -61,6 +62,8 @@ public class EnderecoService {
             responseDOM.setBairro(enderecos.getBairro());
             responseDOM.setCidadeId(enderecos.getCidade().getId());
             responseDOM.setClienteId(enderecos.getCliente().getId());
+            responseDOM.setClient(enderecos.getCliente());
+            responseDOM.setCidades(enderecos.getCidade());
             return responseDOM;
         }
         return null;
@@ -91,8 +94,8 @@ public class EnderecoService {
                 throw new CrudException(mensagens);
             }
 
-        Optional<Cliente> resultadoIdCliente = clienteRepository.findById(endereco.getClienteId());
-        Optional<Cidade> resultadoIdCidade = cidadeRepository.findById(endereco.getCidadeId());
+        Optional<Cliente> resultadoIdCliente = clienteRepository.findById(endereco.getIdCliente());
+        Optional<Cidade> resultadoIdCidade = cidadeRepository.findById(endereco.getIdCidade());
 
 
         Endereco enderecosEntidades = new Endereco();
@@ -122,8 +125,8 @@ public class EnderecoService {
             throw new CrudException(mensagens);
         }
 
-        Optional<Cliente> resultadoIdCliente = clienteRepository.findById(endereco.getClienteId());
-        Optional<Cidade> resultadoIdCidade = cidadeRepository.findById(endereco.getCidadeId());
+        Optional<Cliente> resultadoIdCliente = clienteRepository.findById(endereco.getIdCliente());
+        Optional<Cidade> resultadoIdCidade = cidadeRepository.findById(endereco.getIdCidade());
 
 
             if (resultadoIdCliente.isPresent() && resultadoIdCidade.isPresent()) {
@@ -150,7 +153,7 @@ public class EnderecoService {
                     return responseDOM;
                 }
             } else {
-                throw new RuntimeException("Cliente não encontrado pelo ID fornecido: " + endereco.getClienteId());
+                throw new RuntimeException("Cliente não encontrado pelo ID fornecido: " + endereco.getIdCliente());
             }
             return null;
 
@@ -172,9 +175,6 @@ public class EnderecoService {
 
         if (endereco.getBairro() == null || endereco.getBairro().equals("")) {
             mensagens.add("bairro não informado");
-        }
-        if (endereco.getCidadeId() == null || endereco.getCidadeId().equals("")) {
-            mensagens.add("cidade não informado");
         }
         if (endereco.getRua() == null || endereco.getRua().equals("")) {
             mensagens.add("rua não informado");

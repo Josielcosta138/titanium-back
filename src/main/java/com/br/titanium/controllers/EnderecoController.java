@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3001")
 @Controller
 @RequestMapping("/titanium/endereco")
 public class EnderecoController {
@@ -84,7 +84,7 @@ public class EnderecoController {
 
 
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3001")
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarEndereco(@RequestBody EnderecoRequestDom endereco){
         try {
