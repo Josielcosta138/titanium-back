@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3001")
 @Controller
 @RequestMapping("/titanium/cliente")
 public class ClienteController {
@@ -54,7 +54,7 @@ public class ClienteController {
     }
 
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregarDadosApis/{cnpj}")
     public ResponseEntity<ClienteResponseDom> carregarClientesViaApi(@PathVariable String cnpj) {
         try {
@@ -71,7 +71,7 @@ public class ClienteController {
     }
 
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @PostMapping(value = "/criarClientes", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarCliente(@RequestBody ClienteResponseDom cliente){
         try {

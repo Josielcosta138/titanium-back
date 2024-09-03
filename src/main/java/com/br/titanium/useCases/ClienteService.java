@@ -89,6 +89,7 @@ public class ClienteService {
                     responseDOM.setBairro(apiResponse.getBairro());
                     responseDOM.setMunicipio(apiResponse.getMunicipio());
                     responseDOM.setUf(apiResponse.getUf());
+                    responseDOM.setCep(apiResponse.getCep());
 
 
                 return responseDOM;
@@ -172,7 +173,7 @@ public class ClienteService {
             mensagens.add("cnpj do cliente não informado");
         }
 
-        if (cliente.getNome() == null || cliente.getNome().equals("")) {
+        if (cliente.getFantasia() == null || cliente.getFantasia().equals("")) {
             mensagens.add("nome do cliente não informado");
         }
         return mensagens;

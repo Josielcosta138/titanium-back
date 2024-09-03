@@ -1,14 +1,11 @@
 package com.br.titanium.useCases.endereco.domains;
 
-import com.br.titanium.entitys.Cidade;
-import com.br.titanium.entitys.Cliente;
-
 public class EnderecoRequestDom {
 
     private String rua;
     private String bairro;
-    private Long clienteId;
-    private Long cidadeId;
+    private Long idCliente;
+    private Long idCidade;
 
     public String getRua() {
         return rua;
@@ -26,19 +23,19 @@ public class EnderecoRequestDom {
         this.bairro = bairro;
     }
 
-    public Long getClienteId() {
-        return clienteId;
+    public Long getIdCliente() {
+        return idCliente;
     }
 
-    public void setClienteId(Long clienteId) {
-        this.clienteId = clienteId;
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Long getCidadeId() {
-        return cidadeId;
+    public Long getIdCidade() {
+        return idCidade;
     }
 
-    public void setCidadeId(Long cidadeId) {
-        this.cidadeId = cidadeId;
+    public void setIdCidade(Long idCidade) {
+        this.idCidade = idCidade;
     }
 }
