@@ -14,6 +14,16 @@ public class ClienteResponseDom {
     private String uf;
     private String logradouro;
 
+    private String cep;
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public String getLogradouro() {
         return logradouro;
     }
