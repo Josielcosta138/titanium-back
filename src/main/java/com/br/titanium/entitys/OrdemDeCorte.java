@@ -2,9 +2,11 @@ package com.br.titanium.entitys;
 
 import jakarta.persistence.*;
 
-@Entity
-public class GradeMateriaPrima {
+import java.util.List;
 
+//@Entity(name = "ordem_corte")
+@Entity
+public class OrdemDeCorte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,17 +16,13 @@ public class GradeMateriaPrima {
     private MateriaPrima materiaPrima;
 
     @ManyToOne
-    @JoinColumn(name = "tamanho_grade_id", nullable = false)
-    private Grade tamanhoGrade;
-
-    @ManyToOne
     @JoinColumn(name = "ordem_servico_id", nullable = false)
     private OrdemServico ordemServico;
 
-    @Column(nullable = false)
-    private Integer quantidade;
+    @OneToMany(mappedBy = "ordemDeCorte", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrdemCorteTamanho> ordemCorteTamanhos;
 
-
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -41,19 +39,19 @@ public class GradeMateriaPrima {
         this.materiaPrima = materiaPrima;
     }
 
-    public Grade getTamanhoGrade() {
-        return tamanhoGrade;
+    public OrdemServico getOrdemServico() {
+        return ordemServico;
     }
 
-    public void setTamanhoGrade(Grade tamanhoGrade) {
-        this.tamanhoGrade = tamanhoGrade;
+    public void setOrdemServico(OrdemServico ordemServico) {
+        this.ordemServico = ordemServico;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public List<OrdemCorteTamanho> getOrdemCorteTamanhos() {
+        return ordemCorteTamanhos;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    public void setOrdemCorteTamanhos(List<OrdemCorteTamanho> ordemCorteTamanhos) {
+        this.ordemCorteTamanhos = ordemCorteTamanhos;
     }
 }

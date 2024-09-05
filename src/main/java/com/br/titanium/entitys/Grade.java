@@ -3,7 +3,6 @@ package com.br.titanium.entitys;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Grade {
@@ -15,7 +14,7 @@ public class Grade {
     private String idenficacaograde;
 
     @OneToMany(mappedBy = "tamanhoGrade", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<GradeMateriaPrima> gradeMateriaPrimaList;
+    private List<OrdemCorteTamanho> ordemCorteTamanhos;
 
     public Long getId() {
         return id;
@@ -34,11 +33,11 @@ public class Grade {
     }
 
 
-    public List<GradeMateriaPrima> getGradeMateriaPrimaList() {
-        return gradeMateriaPrimaList;
+    public List<OrdemCorteTamanho> getOrdemCorteTamanhos() {
+        return ordemCorteTamanhos;
     }
 
-    public void setGradeMateriaPrimaList(List<GradeMateriaPrima> gradeMateriaPrimaList) {
-        this.gradeMateriaPrimaList = gradeMateriaPrimaList;
+    public void setOrdemCorteTamanhos(List<OrdemCorteTamanho> ordemCorteTamanhos) {
+        this.ordemCorteTamanhos = ordemCorteTamanhos;
     }
 }
