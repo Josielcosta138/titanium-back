@@ -35,7 +35,7 @@ public class OrdemServico {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<GradeMateriaPrima> gradeMateriaPrimaList;
+    private List<OrdemDeCorte> gradeMateriaPrimaList;
 
     public Long getId() {
         return id;
@@ -118,11 +118,11 @@ public class OrdemServico {
     }
 
 
-    public List<GradeMateriaPrima> getGradeMateriaPrimaList() {
+    public List<OrdemDeCorte> getGradeMateriaPrimaList() {
         return gradeMateriaPrimaList;
     }
 
-    public void setGradeMateriaPrimaList(List<GradeMateriaPrima> gradeMateriaPrimaList) {
+    public void setGradeMateriaPrimaList(List<OrdemDeCorte> gradeMateriaPrimaList) {
         this.gradeMateriaPrimaList = gradeMateriaPrimaList;
     }
 }
