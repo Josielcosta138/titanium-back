@@ -11,7 +11,7 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = true)
-    private String idenficacaograde;
+    private String identificacaograde;
 
     @OneToMany(mappedBy = "tamanhoGrade", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdemCorteTamanho> ordemCorteTamanhos;
@@ -24,12 +24,12 @@ public class Grade {
         this.id = id;
     }
 
-    public String getIdenficacaograde() {
-        return idenficacaograde;
+    public String getIdentificacaograde() {
+        return identificacaograde;
     }
 
-    public void setIdenficacaograde(String idenficacaograde) {
-        this.idenficacaograde = idenficacaograde;
+    public void setIdentificacaograde(String identificacaograde) {
+        this.identificacaograde = identificacaograde;
     }
 
 
