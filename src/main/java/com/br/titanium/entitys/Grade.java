@@ -3,7 +3,6 @@ package com.br.titanium.entitys;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Grade {
@@ -12,7 +11,7 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = true)
-    private String idenficacaograde;
+    private String identificacaoGrade;
 
     @OneToMany(mappedBy = "tamanhoGrade", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeMateriaPrima> gradeMateriaPrimaList;
@@ -25,12 +24,12 @@ public class Grade {
         this.id = id;
     }
 
-    public String getIdenficacaograde() {
-        return idenficacaograde;
+    public String getIdentificacaoGrade() {
+        return identificacaoGrade;
     }
 
-    public void setIdenficacaograde(String idenficacaograde) {
-        this.idenficacaograde = idenficacaograde;
+    public void setIdentificacaoGrade(String identificacaoGrade) {
+        this.identificacaoGrade = identificacaoGrade;
     }
 
 
