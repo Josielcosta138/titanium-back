@@ -131,7 +131,14 @@ public class ClienteService {
 
 
 
-    public ClienteResponseDom atualizarCliente(Long id, ClienteResponseDom cliente){
+    public ClienteResponseDom atualizarCliente(Long id, ClienteResponseDom cliente)throws CrudException{
+
+        List<String>mensagens = this.validarCliente(cliente);
+        if (!mensagens.isEmpty()){
+            throw new CrudException(mensagens);
+        }
+
+
         Optional<Cliente> resultado = clienteRepository.findById(id).map(record -> {
             record.setRazaoSocial(cliente.getNome());
             record.setNomeFantasia(cliente.getFantasia());

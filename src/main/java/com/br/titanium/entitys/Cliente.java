@@ -31,6 +31,7 @@ public class Cliente {
     private List<OrdemServico> ordensServico;
 
 
+    @JsonIgnore
     public List<OrdemServico> getOrdensServico() {
         return ordensServico;
     }

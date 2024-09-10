@@ -2,7 +2,10 @@ package com.br.titanium.controllers;
 
 
 import com.br.titanium.useCases.CidadeService;
+import com.br.titanium.useCases.cidade.domains.CidadeRequestDom;
 import com.br.titanium.useCases.cidade.domains.CidadeResponseDom;
+import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
+import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +57,23 @@ public class CidadeController {
         catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado"+ e.getMessage()));
+        }
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/atualizarCidade/{id}")
+    public ResponseEntity<CidadeResponseDom> atualizarCidade(@PathVariable Long id, @RequestBody CidadeRequestDom cidade){
+        try {
+            CidadeResponseDom responseDOM = cidadeService.atualizarCidade(id, cidade);
+            if (responseDOM == null){
+                return ResponseEntity.badRequest().body(null);
+            }
+            return ResponseEntity.ok(responseDOM);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
         }
     }
 

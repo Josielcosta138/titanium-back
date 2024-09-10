@@ -21,6 +21,7 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
+    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar")
     public ResponseEntity<List<EnderecoResponseDom>> carregarEnderecos(){
         try {
@@ -42,6 +43,7 @@ public class EnderecoController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar/{id}")
     public ResponseEntity<EnderecoResponseDom> carregarEnderecosById(@PathVariable Long id){
 
@@ -64,6 +66,8 @@ public class EnderecoController {
         }
     }
 
+
+    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregaEnderecosIdCliente/{id}")
     public ResponseEntity<List<EnderecoResponseDom>> carregarEnderecosByIdCliente(@PathVariable Long id){
 
@@ -103,9 +107,9 @@ public class EnderecoController {
 
 
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<EnderecoResponseDom> atualizarEndereco(@PathVariable Long id, @RequestBody EnderecoRequestDom endereco){
+    public ResponseEntity<EnderecoResponseDom> atualizarEndereco(@PathVariable Long id, @RequestBody EnderecoRequestDom endereco) {
         try {
             EnderecoResponseDom responseDOM = enderecoService.atualizarEndereco(id, endereco);
             if (responseDOM == null){
@@ -119,7 +123,7 @@ public class EnderecoController {
         }
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<Void> excluirEndereco(@PathVariable Long id){
         try {
