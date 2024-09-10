@@ -1,91 +1,32 @@
-package com.br.titanium.entitys;
+package com.br.titanium.useCases.OrdemServico.domains;
 
-
+import com.br.titanium.entitys.Cliente;
+import com.br.titanium.entitys.OrdemDeCorte;
 import com.br.titanium.utils.StatusOS;
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-public class OrdemServico {
+public class OrdemServicoResponseDom {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private Integer qtdeRolos;
-    @Column(nullable = false)
     private LocalDate dataEntrada;
-    @Column(nullable = false)
     private LocalDate dataEntrega;
-    @Column(nullable = false)
     private Integer qtdePecas;
-    @Column(nullable = false)
     private Double qtdeMaterialFalhas;
-    @Column(nullable = false)
     private Double qtdeMaterialRestante;
-    @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal valorPorPeca;
-    @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal valorTotal;
-    @Column(nullable = false)
     private String codReferenciaOs;
-    @Column(nullable = false)
     private String modelo;
-    @Column(nullable = true)
     private Integer numeorNotaFiscal;
-    @Column(nullable = true)
     private String campoObservacao;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private StatusOS status;
-
-
-
-
-
-
-    // --- GETTERS AND SETTERS
-    public StatusOS getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusOS status) {
-        this.status = status;
-    }
-
-    public String getCampoObservacao() {
-        return campoObservacao;
-    }
-
-    public void setCampoObservacao(String campoObservacao) {
-        this.campoObservacao = campoObservacao;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getCodReferenciaOs() {
-        return codReferenciaOs;
-    }
-
-    public void setCodReferenciaOs(String codReferenciaOs) {
-        this.codReferenciaOs = codReferenciaOs;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
-
-    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdemDeCorte> gradeMateriaPrimaList;
+
 
     public Long getId() {
         return id;
@@ -143,14 +84,6 @@ public class OrdemServico {
         this.qtdeMaterialRestante = qtdeMaterialRestante;
     }
 
-    public Integer getNumeorNotaFiscal() {
-        return numeorNotaFiscal;
-    }
-
-    public void setNumeorNotaFiscal(Integer numeorNotaFiscal) {
-        this.numeorNotaFiscal = numeorNotaFiscal;
-    }
-
     public BigDecimal getValorPorPeca() {
         return valorPorPeca;
     }
@@ -159,13 +92,52 @@ public class OrdemServico {
         this.valorPorPeca = valorPorPeca;
     }
 
-
     public BigDecimal getValorTotal() {
         return valorTotal;
     }
 
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getCodReferenciaOs() {
+        return codReferenciaOs;
+    }
+
+    public void setCodReferenciaOs(String codReferenciaOs) {
+        this.codReferenciaOs = codReferenciaOs;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public Integer getNumeorNotaFiscal() {
+        return numeorNotaFiscal;
+    }
+
+    public void setNumeorNotaFiscal(Integer numeorNotaFiscal) {
+        this.numeorNotaFiscal = numeorNotaFiscal;
+    }
+
+    public String getCampoObservacao() {
+        return campoObservacao;
+    }
+
+    public void setCampoObservacao(String campoObservacao) {
+        this.campoObservacao = campoObservacao;
+    }
+
+    public StatusOS getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusOS status) {
+        this.status = status;
     }
 
     public Cliente getCliente() {
