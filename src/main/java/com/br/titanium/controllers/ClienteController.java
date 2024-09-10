@@ -19,7 +19,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar")
     public ResponseEntity<List<ClienteResponseDom>> carregarClientes() {
         try {
@@ -37,7 +37,7 @@ public class ClienteController {
         }
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar/{id}")
     public  ResponseEntity<ClienteResponseDom> carregarClientesById(@PathVariable Long id){
         try {
@@ -91,7 +91,7 @@ public class ClienteController {
 
 
 
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizarCliente/{id}")
     public ResponseEntity<ClienteResponseDom> atualizarCliente(@PathVariable Long id, @RequestBody ClienteResponseDom cliente){
         try {
