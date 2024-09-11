@@ -3,7 +3,7 @@ package com.br.titanium.useCases.grade.domains;
 public class GradeResponseDom {
 
     private long id;
-    private String identificacaoGrade;
+    private String identificacaograde;
 
     public long getId() {
         return id;
@@ -13,11 +13,11 @@ public class GradeResponseDom {
         this.id = id;
     }
 
-    public String getIdentificacaoGrade() {
-        return identificacaoGrade;
+    public String getIdentificacaograde() {
+        return identificacaograde;
     }
 
-    public void setIdentificacaoGrade(String identificacaoGrade) {
-        this.identificacaoGrade = identificacaoGrade;
+    public void setIdentificacaograde(String identificacaograde) {
+        this.identificacaograde = identificacaograde;
     }
 }
