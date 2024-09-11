@@ -14,11 +14,11 @@ public class MateriaPrima {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
-    private Integer comprimento;
+    private Double comprimento;
     @Column(nullable = false)
-    private Integer qtde;
+    private Double qtde;
     @Column(nullable = false)
-    private String largura;
+    private Double largura;
     @Column(nullable = true)
     private String codReferencia;
 
@@ -43,28 +43,28 @@ public class MateriaPrima {
         this.nome = nome;
     }
 
-    public Integer getComprimento() {
+    public Double getComprimento() {
         return comprimento;
     }
 
-    public void setComprimento(Integer comprimento) {
+    public void setComprimento(Double comprimento) {
         this.comprimento = comprimento;
     }
 
-    public Integer getQtde() {
-        return qtde;
-    }
-
-    public void setQtde(Integer qtde) {
-        this.qtde = qtde;
-    }
-
-    public String getLargura() {
+    public Double getLargura() {
         return largura;
     }
 
-    public void setLargura(String largura) {
+    public void setLargura(Double largura) {
         this.largura = largura;
+    }
+
+    public Double getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(Double qtde) {
+        this.qtde = qtde;
     }
 
     public String getCodReferencia() {

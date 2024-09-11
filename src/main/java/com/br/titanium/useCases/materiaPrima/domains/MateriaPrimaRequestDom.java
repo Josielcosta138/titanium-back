@@ -3,9 +3,9 @@ package com.br.titanium.useCases.materiaPrima.domains;
 public class MateriaPrimaRequestDom {
 
     private String nome;
-    private Integer comprimento;
-    private Integer qtde;
-    private String largura;
+    private Double comprimento;
+    private Double qtde;
+    private Double largura;
     private String codReferencia;
 
 
@@ -17,27 +17,27 @@ public class MateriaPrimaRequestDom {
         this.nome = nome;
     }
 
-    public Integer getComprimento() {
+    public Double getComprimento() {
         return comprimento;
     }
 
-    public void setComprimento(Integer comprimento) {
+    public void setComprimento(Double comprimento) {
         this.comprimento = comprimento;
     }
 
-    public Integer getQtde() {
+    public Double getQtde() {
         return qtde;
     }
 
-    public void setQtde(Integer qtde) {
+    public void setQtde(Double qtde) {
         this.qtde = qtde;
     }
 
-    public String getLargura() {
+    public Double getLargura() {
         return largura;
     }
 
-    public void setLargura(String largura) {
+    public void setLargura(Double largura) {
         this.largura = largura;
     }
 

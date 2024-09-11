@@ -52,6 +52,7 @@ public class MateriaPrimaService {
 
             MateriaPrimaResponseDom mpResponseDom = new MateriaPrimaResponseDom();
             mpResponseDom.setId(resultado.getId());
+            mpResponseDom.setNome(resultado.getNome());
             mpResponseDom.setComprimento(resultado.getComprimento());
             mpResponseDom.setQtde(resultado.getQtde());
             mpResponseDom.setLargura(resultado.getLargura());
