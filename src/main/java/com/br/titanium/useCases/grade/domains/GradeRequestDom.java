@@ -2,13 +2,13 @@ package com.br.titanium.useCases.grade.domains;
 
 public class GradeRequestDom {
 
-    private String identificacaoGrade;
+    private String identificacaograde;
 
-    public String getIdentificacaoGrade() {
-        return identificacaoGrade;
+    public String getIdentificacaograde() {
+        return identificacaograde;
     }
 
-    public void setIdentificacaoGrade(String identificacaoGrade) {
-        this.identificacaoGrade = identificacaoGrade;
+    public void setIdentificacaograde(String identificacaograde) {
+        this.identificacaograde = identificacaograde;
     }
 }
