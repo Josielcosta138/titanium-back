@@ -24,7 +24,7 @@ public class GradeService {
             GradeResponseDom aux = new GradeResponseDom();
 
             aux.setId(resultado.getId());
-            aux.setIdentificacaoGrade(resultado.getIdentificacaograde());
+            aux.setIdentificacaograde(resultado.getIdentificacaograde());
 
             listaGrade.add(aux);
         }
