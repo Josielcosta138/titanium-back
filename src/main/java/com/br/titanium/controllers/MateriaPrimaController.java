@@ -37,7 +37,7 @@ public class MateriaPrimaController {
         }
     }
 
-    @PostMapping("criarMateriaPrima")
+    @PostMapping("/criarMateriaPrima")
     public ResponseEntity<?> criarMateriaPrima(@RequestBody MateriaPrimaResponseDom materiaPrima){
         try {
             MateriaPrimaResponseDom responseDom = materiaPrimaService.criarMateriaPrima(materiaPrima);
