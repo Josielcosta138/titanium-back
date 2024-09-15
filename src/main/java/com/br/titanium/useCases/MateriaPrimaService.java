@@ -1,8 +1,10 @@
 package com.br.titanium.useCases;
 
 import com.br.titanium.entitys.MateriaPrima;
+import com.br.titanium.entitys.OrdemDeCorte;
 import com.br.titanium.repositorys.MateriaPrimaRepository;
 import com.br.titanium.useCases.materiaPrima.domains.MateriaPrimaResponseDom;
+import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,4 +71,6 @@ public class MateriaPrimaService {
         }
         return mensagens;
     }
+
+
 }

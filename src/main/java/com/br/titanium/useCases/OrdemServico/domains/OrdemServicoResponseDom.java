@@ -2,7 +2,10 @@ package com.br.titanium.useCases.OrdemServico.domains;
 
 import com.br.titanium.entitys.Cliente;
 import com.br.titanium.entitys.OrdemDeCorte;
+import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
+import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.StatusOS;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,6 +29,8 @@ public class OrdemServicoResponseDom {
     private StatusOS status;
     private Cliente cliente;
     private List<OrdemDeCorte> gradeMateriaPrimaList;
+    private List<OrdemCorteResponseDom> ordensDeCorte;
+    private List<EnderecoResponseDom> enderecosCliemte;
 
 
     public Long getId() {
@@ -155,5 +160,22 @@ public class OrdemServicoResponseDom {
 
     public void setGradeMateriaPrimaList(List<OrdemDeCorte> gradeMateriaPrimaList) {
         this.gradeMateriaPrimaList = gradeMateriaPrimaList;
+    }
+
+    public List<OrdemCorteResponseDom> getOrdensDeCorte() {
+        return ordensDeCorte;
+    }
+
+
+    public void setOrdensDeCorte(List<OrdemCorteResponseDom> ordensDeCorte) {
+        this.ordensDeCorte = ordensDeCorte;
+    }
+
+    public List<EnderecoResponseDom> getEnderecosCliemte() {
+        return enderecosCliemte;
+    }
+
+    public void setEnderecosCliemte(List<EnderecoResponseDom> enderecosCliemte) {
+        this.enderecosCliemte = enderecosCliemte;
     }
 }

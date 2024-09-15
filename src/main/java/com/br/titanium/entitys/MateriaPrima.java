@@ -1,5 +1,8 @@
 package com.br.titanium.entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -22,8 +25,7 @@ public class MateriaPrima {
     @Column(nullable = true)
     private String codReferencia;
 
-
-
+    @JsonIgnore
     @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdemDeCorte> gradeMateriaPrimaList;
 
@@ -76,6 +78,7 @@ public class MateriaPrima {
     }
 
 
+    @JsonIgnore
     public List<OrdemDeCorte> getGradeMateriaPrimaList() {
         return gradeMateriaPrimaList;
     }

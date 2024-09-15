@@ -2,6 +2,7 @@ package com.br.titanium.controllers;
 
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.OrdemServicoService;
+import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,15 +31,11 @@ public class OrdemServicoController {
             if (response.isEmpty()){
                 status = 204;
             }
-            return ResponseEntity
-                    .status(status)
-                    .body(response);
+            return ResponseEntity.status(status).body(response);
         }
         catch (Exception e){
             e.printStackTrace();
-            return ResponseEntity
-                    .badRequest()
-                    .body(null);
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
