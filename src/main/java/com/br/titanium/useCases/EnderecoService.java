@@ -80,7 +80,6 @@ public class EnderecoService {
             aux.setRua(dadoResultado.getRua());
             aux.setBairro(dadoResultado.getBairro());
             aux.setCidadeId(dadoResultado.getCidade().getId());
-
             listaDeEnderecos.add(aux);
         }
         return listaDeEnderecos;

@@ -2,6 +2,7 @@ package com.br.titanium.entitys;
 
 
 import com.br.titanium.utils.StatusOS;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -45,8 +46,6 @@ public class OrdemServico {
 
 
 
-
-
     // --- GETTERS AND SETTERS
     public StatusOS getStatus() {
         return status;
@@ -83,6 +82,7 @@ public class OrdemServico {
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
+
 
     @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdemDeCorte> gradeMateriaPrimaList;
@@ -175,7 +175,6 @@ public class OrdemServico {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
 
     public List<OrdemDeCorte> getGradeMateriaPrimaList() {
         return gradeMateriaPrimaList;
