@@ -1,6 +1,7 @@
 package com.br.titanium.entitys;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,7 @@ public class OrdemCorteTamanho {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ordem_corte_id", nullable = false)
     private OrdemDeCorte ordemDeCorte;

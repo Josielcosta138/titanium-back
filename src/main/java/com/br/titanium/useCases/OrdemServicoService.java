@@ -1,9 +1,16 @@
 package com.br.titanium.useCases;
 
 
+import com.br.titanium.entitys.Cidade;
+import com.br.titanium.entitys.Endereco;
+import com.br.titanium.entitys.OrdemDeCorte;
 import com.br.titanium.entitys.OrdemServico;
+import com.br.titanium.repositorys.EnderecoRepository;
+import com.br.titanium.repositorys.OrdemDeCorteRepository;
 import com.br.titanium.repositorys.OrdemServicoRepository;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
+import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
+import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +23,15 @@ public class OrdemServicoService {
 
     @Autowired
     private OrdemServicoRepository ordemServicoRepository;
+    @Autowired
+    private OrdemDeCorteRepository ordemDeCorteRepository;
+    @Autowired
+    EnderecoRepository enderecoRepository;
 
     public List<OrdemServicoResponseDom> carregarOS() {
 
         List<OrdemServico> result = ordemServicoRepository.findAll();
-            List<OrdemServicoResponseDom> listaDeOrdemServico = new ArrayList<>();
+        List<OrdemServicoResponseDom> listaDeOrdemServico = new ArrayList<>();
 
             for (OrdemServico ordemServico : result){
                 OrdemServicoResponseDom auxResponse = new OrdemServicoResponseDom();
@@ -41,12 +52,49 @@ public class OrdemServicoService {
                 auxResponse.setCampoObservacao(ordemServico.getCampoObservacao());
                 auxResponse.setStatus(ordemServico.getStatus());
 
+
+
+                List<OrdemDeCorte> ordensDeCorte = ordemDeCorteRepository.findByOrdemServicoId(ordemServico.getId());
+                List<OrdemCorteResponseDom> ListaMateriaPrima = new ArrayList<>();
+
+                for (OrdemDeCorte ordemDeCorte : ordensDeCorte) {
+                    OrdemCorteResponseDom ordemDeCorteResponseDom = new OrdemCorteResponseDom();
+                    ordemDeCorteResponseDom.setId(ordemDeCorte.getId());
+                    ordemDeCorteResponseDom.setMateriaPrima(ordemDeCorte.getMateriaPrima());
+
+                    ListaMateriaPrima.add(ordemDeCorteResponseDom);
+                }
+                auxResponse.setOrdensDeCorte(ListaMateriaPrima);
+
+
+
+                List<Endereco> resultadoDeEnderecosPostamn = enderecoRepository.findByClienteId(ordemServico.getCliente().getId());
+                List<EnderecoResponseDom> listaDeEnderecos = new ArrayList<>();
+
+                for (Endereco dadoResultado: resultadoDeEnderecosPostamn) {
+                    EnderecoResponseDom aux = new EnderecoResponseDom();
+                    aux.setId(dadoResultado.getId());
+                    aux.setRua(dadoResultado.getRua());
+                    aux.setBairro(dadoResultado.getBairro());
+                    aux.setCidadeId(dadoResultado.getCidade().getId());
+
+                    List<Endereco> resultadoCidadesPorEndereco = enderecoRepository.findByCidadeId(dadoResultado.getCidade().getId());
+                    aux.setCidadeResponseDomList(resultadoCidadesPorEndereco);
+
+                    listaDeEnderecos.add(aux);
+                }
+                auxResponse.setEnderecosCliemte(listaDeEnderecos);
+
                 listaDeOrdemServico.add(auxResponse);
-
             }
-
         return listaDeOrdemServico;
     }
+
+
+
+
+
+
 
     public OrdemServicoResponseDom carregarOSById(Long id) {
         Optional<OrdemServico> result = ordemServicoRepository.findById(id);

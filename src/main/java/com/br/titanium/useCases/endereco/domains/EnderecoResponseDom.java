@@ -4,6 +4,8 @@ import com.br.titanium.entitys.Cidade;
 import com.br.titanium.entitys.Cliente;
 import com.br.titanium.entitys.Endereco;
 
+import java.util.List;
+
 public class EnderecoResponseDom {
 
     private Long id;
@@ -13,6 +15,8 @@ public class EnderecoResponseDom {
     private Long cidadeId;
     private Cliente client;
     private Cidade cidades;
+
+    private List<Endereco> cidadeResponseDomList;
 
     public Cliente getClient() {
         return client;
@@ -68,5 +72,13 @@ public class EnderecoResponseDom {
 
     public void setCidadeId(Long cidadeId) {
         this.cidadeId = cidadeId;
+    }
+
+    public List<Endereco> getCidadeResponseDomList() {
+        return cidadeResponseDomList;
+    }
+
+    public void setCidadeResponseDomList(List<Endereco> cidadeResponseDomList) {
+        this.cidadeResponseDomList = cidadeResponseDomList;
     }
 }
