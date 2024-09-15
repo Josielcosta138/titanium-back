@@ -1,10 +1,13 @@
 package com.br.titanium.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-//@Entity(name = "ordem_corte")
+
 @Entity
 public class OrdemDeCorte {
     @Id
@@ -15,6 +18,7 @@ public class OrdemDeCorte {
     @JoinColumn(name = "materia_prima_id", nullable = false)
     private MateriaPrima materiaPrima;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ordem_servico_id", nullable = false)
     private OrdemServico ordemServico;
@@ -31,6 +35,7 @@ public class OrdemDeCorte {
         this.id = id;
     }
 
+
     public MateriaPrima getMateriaPrima() {
         return materiaPrima;
     }
@@ -46,6 +51,7 @@ public class OrdemDeCorte {
     public void setOrdemServico(OrdemServico ordemServico) {
         this.ordemServico = ordemServico;
     }
+
 
     public List<OrdemCorteTamanho> getOrdemCorteTamanhos() {
         return ordemCorteTamanhos;
