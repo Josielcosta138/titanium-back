@@ -24,6 +24,7 @@ public class OrdemServicoResquestDom {
     private String campoObservacao;
     private StatusOS status;
     private Cliente cliente;
+    private Long clienteId;
     private List<OrdemDeCorte> gradeMateriaPrimaList;
 
 
@@ -148,4 +149,7 @@ public class OrdemServicoResquestDom {
         this.gradeMateriaPrimaList = gradeMateriaPrimaList;
     }
 
+    public Long getClienteId() {
+        return clienteId;
+    }
 }
