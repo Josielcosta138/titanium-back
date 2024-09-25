@@ -31,6 +31,7 @@ public class OrdemServicoResponseDom {
     private List<OrdemDeCorte> gradeMateriaPrimaList;
     private List<OrdemCorteResponseDom> ordensDeCorte;
     private List<EnderecoResponseDom> enderecosCliemte;
+    private Long clienteId;
 
 
     public Long getId() {
@@ -177,5 +178,9 @@ public class OrdemServicoResponseDom {
 
     public void setEnderecosCliemte(List<EnderecoResponseDom> enderecosCliemte) {
         this.enderecosCliemte = enderecosCliemte;
+    }
+
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
     }
 }

@@ -1,14 +1,23 @@
 package com.br.titanium.useCases;
 
+import com.br.titanium.entitys.Cliente;
+import com.br.titanium.entitys.MateriaPrima;
 import com.br.titanium.entitys.OrdemDeCorte;
+import com.br.titanium.entitys.OrdemServico;
+import com.br.titanium.repositorys.MateriaPrimaRepository;
 import com.br.titanium.repositorys.OrdemDeCorteRepository;
 import com.br.titanium.repositorys.OrdemServicoRepository;
+import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
+import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteRequestoDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
+import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrdemCorteService {
@@ -17,6 +26,8 @@ public class OrdemCorteService {
     private OrdemServicoRepository ordemServicoRepository;
     @Autowired
     private OrdemDeCorteRepository ordemDeCorteRepository;
+    @Autowired
+    private MateriaPrimaRepository materiaPrimaRepository;
 
     public List<OrdemCorteResponseDom> carregarMateriaPrimaByOS(Long id) {
 
@@ -35,6 +46,43 @@ public class OrdemCorteService {
     }
 
 
+    public OrdemCorteResponseDom criarOrdemCorte(OrdemCorteRequestoDom ordemDeCorte) throws CrudException {
+        /*List<String>mensagens = this.validarEndereco(ordemDeCorte);
+        if (!mensagens.isEmpty()){
+            throw new CrudException(mensagens);
+        }*/
+
+        Optional<OrdemServico> resultadoIdCliente = ordemServicoRepository.findById(ordemDeCorte.getServicoId());
+        Optional<MateriaPrima> resultadoMateriaPrima = materiaPrimaRepository.findById(ordemDeCorte.getMateriaPrimaId());
+
+
+        OrdemDeCorte ordemCorteEntidades = new OrdemDeCorte();
+        ordemCorteEntidades.setOrdemServico(resultadoIdCliente.get());
+        ordemCorteEntidades.setMateriaPrima(resultadoMateriaPrima.get());
+        OrdemDeCorte resultadoOrdem = ordemDeCorteRepository.save(ordemCorteEntidades);
+
+
+        OrdemCorteResponseDom responseDom = new OrdemCorteResponseDom();
+        responseDom.setServicoId(resultadoOrdem.getOrdemServico().getId());
+        responseDom.setMateriaPrimaCorteId(resultadoOrdem.getMateriaPrima().getId());
+        responseDom.setId(resultadoOrdem.getId());
+
+        return responseDom;
+    }
+
+
+    private List<String> validarEndereco(OrdemCorteRequestoDom ordemCorte) {
+        List<String> mensagens = new ArrayList<>();
+
+        if (ordemCorte.getOrdemServico().getId() == null) {
+            mensagens.add("Id OS não informado");
+        }
+        if (ordemCorte.getMateriaPrima().getId() == null) {
+            mensagens.add("Id Matéria não informado");
+        }
+        return mensagens;
+
+    }
 
 
 }

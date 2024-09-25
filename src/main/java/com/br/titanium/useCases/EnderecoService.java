@@ -163,7 +163,6 @@ public class EnderecoService {
         enderecoRepository.deleteById(id);
     }
 
-
     private List<String> validarEndereco(EnderecoRequestDom endereco) {
         List<String> mensagens = new ArrayList<>();
 
