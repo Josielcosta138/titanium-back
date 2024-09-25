@@ -15,8 +15,36 @@ public class OrdemCorteResponseDom {
 
     private OrdemServico ordemServico;
 
-
     private List<OrdemCorteTamanho> ordemCorteTamanhos;
+
+    private Long servicoId;
+    private List materiaPrimaId;
+    private Long materiaPrimaCorteId;
+
+
+    public Long getMateriaPrimaCorteId() {
+        return materiaPrimaCorteId;
+    }
+
+    public void setMateriaPrimaCorteId(Long materiaPrimaCorteId) {
+        this.materiaPrimaCorteId = materiaPrimaCorteId;
+    }
+
+    public Long getServicoId() {
+        return servicoId;
+    }
+
+    public void setServicoId(Long servicoId) {
+        this.servicoId = servicoId;
+    }
+
+    public List getMateriaPrimaId() {
+        return materiaPrimaId;
+    }
+
+    public void setMateriaPrimaId(List materiaPrimaId) {
+        this.materiaPrimaId = materiaPrimaId;
+    }
 
     public Long getId() {
         return id;

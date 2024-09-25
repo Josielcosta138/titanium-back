@@ -1,15 +1,17 @@
 package com.br.titanium.controllers;
 
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
+import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResquestDom;
 import com.br.titanium.useCases.OrdemServicoService;
+import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
+import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
+import com.br.titanium.utils.CrudException;
+import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,7 +42,6 @@ public class OrdemServicoController {
     }
 
 
-
     @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar/{id}")
     public ResponseEntity<OrdemServicoResponseDom> carregarEnderecosById(@PathVariable Long id){
@@ -62,6 +63,26 @@ public class OrdemServicoController {
                     .body(null);
         }
     }
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
+    public ResponseEntity<?> criarOrdemServico(@RequestBody OrdemServicoResquestDom ordemServico){
+        try {
+            OrdemServicoResponseDom responseDOM = ordemServicoService.criarOrdemServico(ordemServico);
+            return ResponseEntity.status(201).body(responseDOM);
+        }
+        catch (CrudException es){
+            es.printStackTrace();
+            return ResponseEntity.badRequest().body(ResponseUtil.responseMap(es.getMessages()));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado"+ e.getMessage()));
+        }
+    }
+
 
 
 }
