@@ -3,9 +3,6 @@ package com.br.titanium.controllers;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResquestDom;
 import com.br.titanium.useCases.OrdemServicoService;
-import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
-import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
-import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +79,46 @@ public class OrdemServicoController {
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado"+ e.getMessage()));
         }
     }
+
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/atualizarOS/{id}")
+    public ResponseEntity<OrdemServicoResponseDom> atualizarOS(@PathVariable Long id, @RequestBody OrdemServicoResponseDom os){
+        try {
+            OrdemServicoResponseDom responseDOM = ordemServicoService.atualizarOrdemServico(id, os);
+
+            if (responseDOM == null){
+                return ResponseEntity.badRequest().body(null);
+            }
+            return ResponseEntity.ok(responseDOM);
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/atualizarStatusOs/{id}")
+    public ResponseEntity<OrdemServicoResponseDom> atualizarStatusOs(@PathVariable Long id, @RequestBody OrdemServicoResponseDom statusOs){
+        try {
+            OrdemServicoResponseDom responseDOM = ordemServicoService.atualizarStatusOs(id, statusOs);
+
+            if (responseDOM == null){
+                return ResponseEntity.badRequest().body(null);
+            }
+            return ResponseEntity.ok(responseDOM);
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 
 
 
