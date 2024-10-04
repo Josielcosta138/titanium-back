@@ -8,9 +8,8 @@ import com.br.titanium.repositorys.OrdemDeCorteRepository;
 import com.br.titanium.repositorys.OrdemServicoRepository;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResquestDom;
-import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
+import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
-import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteRequestoDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,6 +177,83 @@ public class OrdemServicoService {
 
 
 
+
+    public OrdemServicoResponseDom atualizarOrdemServico(Long id, OrdemServicoResponseDom os)throws CrudException{
+//        List<String>mensagens = this.validarCliente(cliente);
+//        if (!mensagens.isEmpty()){
+//            throw new CrudException(mensagens);
+//        }
+
+        Optional<OrdemServico> resultado = ordemServicoRepository.findById(id);
+
+        if (resultado.isPresent()) {
+            OrdemServico ordemServicoEntidade = resultado.get();
+
+            ordemServicoEntidade.setCampoObservacao(os.getCampoObservacao());
+            ordemServicoEntidade.setQtdeRolos(os.getQtdeRolos());
+            ordemServicoEntidade.setDataEntrada(os.getDataEntrada());
+            ordemServicoEntidade.setDataEntrega(os.getDataEntrega());
+            ordemServicoEntidade.setQtdePecas(os.getQtdePecas());
+            ordemServicoEntidade.setQtdeMaterialFalhas(os.getQtdeMaterialFalhas());
+            ordemServicoEntidade.setQtdeMaterialRestante(os.getQtdeMaterialRestante());
+            ordemServicoEntidade.setValorPorPeca(os.getValorPorPeca());
+            ordemServicoEntidade.setValorTotal(os.getValorTotal());
+            ordemServicoEntidade.setCodReferenciaOs(os.getCodReferenciaOs());
+            ordemServicoEntidade.setModelo(os.getModelo());
+            ordemServicoEntidade.setNumeorNotaFiscal(os.getNumeorNotaFiscal());
+            ordemServicoEntidade.setStatus(os.getStatus());
+            OrdemServico ordemAtualizada = ordemServicoRepository.save(ordemServicoEntidade);
+
+
+            OrdemServicoResponseDom responseDOM = new OrdemServicoResponseDom();
+            responseDOM.setId(ordemAtualizada.getId());
+            responseDOM.setCampoObservacao(ordemAtualizada.getCampoObservacao());
+            responseDOM.setQtdeRolos(ordemAtualizada.getQtdeRolos());
+            responseDOM.setDataEntrada(ordemAtualizada.getDataEntrada());
+            responseDOM.setDataEntrega(ordemAtualizada.getDataEntrega());
+            responseDOM.setQtdePecas(ordemAtualizada.getQtdePecas());
+            responseDOM.setQtdeMaterialFalhas(ordemAtualizada.getQtdeMaterialFalhas());
+            responseDOM.setQtdeMaterialRestante(ordemAtualizada.getQtdeMaterialRestante());
+            responseDOM.setValorPorPeca(ordemAtualizada.getValorPorPeca());
+            responseDOM.setValorTotal(ordemAtualizada.getValorTotal());
+            responseDOM.setCodReferenciaOs(ordemAtualizada.getCodReferenciaOs());
+            responseDOM.setModelo(ordemAtualizada.getModelo());
+            responseDOM.setNumeorNotaFiscal(ordemAtualizada.getNumeorNotaFiscal());
+            responseDOM.setStatus(ordemAtualizada.getStatus());
+
+            return responseDOM;
+        }
+
+        // Caso a ordem de serviço não seja encontrada, lançar uma exceção
+        throw new CrudException("Ordem de serviço não encontrada com o ID: " + id);
+    }
+
+
+
+
+    public OrdemServicoResponseDom atualizarStatusOs(Long id, OrdemServicoResponseDom os)throws CrudException{
+//        List<String>mensagens = this.validarCliente(cliente);
+//        if (!mensagens.isEmpty()){
+//            throw new CrudException(mensagens);
+//        }
+
+        Optional<OrdemServico> resultado = ordemServicoRepository.findById(id);
+
+        if (resultado.isPresent()) {
+            OrdemServico ordemServicoEntidade = resultado.get();
+
+            ordemServicoEntidade.setStatus(os.getStatus());
+            OrdemServico ordemAtualizada = ordemServicoRepository.save(ordemServicoEntidade);
+
+
+            OrdemServicoResponseDom responseDOM = new OrdemServicoResponseDom();
+            responseDOM.setId(ordemAtualizada.getId());
+            responseDOM.setStatus(ordemAtualizada.getStatus());
+
+            return responseDOM;
+        }
+        throw new CrudException("Ordem de serviço não encontrada com o ID: " + id);
+    }
 
 
 

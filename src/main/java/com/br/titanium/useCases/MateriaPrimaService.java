@@ -2,6 +2,7 @@ package com.br.titanium.useCases;
 
 import com.br.titanium.entitys.MateriaPrima;
 import com.br.titanium.entitys.OrdemDeCorte;
+import com.br.titanium.entitys.OrdemServico;
 import com.br.titanium.repositorys.MateriaPrimaRepository;
 import com.br.titanium.useCases.materiaPrima.domains.MateriaPrimaResponseDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MateriaPrimaService {
@@ -63,9 +65,74 @@ public class MateriaPrimaService {
             return mpResponseDom;
     }
 
-    public List<String> validarMateriaPrima (MateriaPrimaResponseDom materiaPrima){
-        List<String> mensagens = new ArrayList<>();
 
+
+
+    public MateriaPrimaResponseDom carregarOSById(Long id) {
+
+        Optional<MateriaPrima> result = materiaPrimaRepository.findById(id);
+
+        if (result.isPresent()) {
+            MateriaPrima mpResesponse = result.get();
+
+            MateriaPrimaResponseDom mpResponseDom = new MateriaPrimaResponseDom();
+            mpResponseDom.setId(mpResesponse.getId());
+            mpResponseDom.setNome(mpResesponse.getNome());
+            mpResponseDom.setComprimento(mpResesponse.getComprimento());
+            mpResponseDom.setQtde(mpResesponse.getQtde());
+            mpResponseDom.setLargura(mpResesponse.getLargura());
+            mpResponseDom.setCodReferencia(mpResesponse.getCodReferencia());
+
+            return mpResponseDom;
+        }
+
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+    public MateriaPrimaResponseDom atualizarMateriaPrima( Long id, MateriaPrimaResponseDom materiaprima) throws CrudException {
+//        List<String> mensagens = this.validarMateriaPrima(materiaprima);
+//        if (!mensagens.isEmpty()){
+//            throw new CrudException(mensagens);
+//        }
+
+        Optional<MateriaPrima> result = materiaPrimaRepository.findById(id);
+
+        if (result.isPresent()) {
+            MateriaPrima materiaPrimaEntidade = result.get();
+
+            materiaPrimaEntidade.setNome(materiaprima.getNome());
+            materiaPrimaEntidade.setComprimento(materiaprima.getComprimento());
+            materiaPrimaEntidade.setQtde(materiaprima.getQtde());
+            materiaPrimaEntidade.setLargura(materiaprima.getLargura());
+            materiaPrimaEntidade.setCodReferencia(materiaprima.getCodReferencia());
+            MateriaPrima materiaPrimaAtualizada = materiaPrimaRepository.save(materiaPrimaEntidade);
+
+            MateriaPrimaResponseDom materiaPrimaResponse = new  MateriaPrimaResponseDom();
+            materiaPrimaResponse.setNome(materiaPrimaAtualizada.getNome());
+            materiaPrimaResponse.setComprimento(materiaPrimaAtualizada.getComprimento());
+            materiaPrimaResponse.setQtde(materiaPrimaAtualizada.getQtde());
+            materiaPrimaResponse.setLargura(materiaPrimaAtualizada.getLargura());
+            materiaPrimaResponse.setCodReferencia(materiaPrimaAtualizada.getCodReferencia());
+
+
+            return materiaPrimaResponse;
+        }
+        throw new CrudException("Matéria prima não encontrada com o ID: " + id);
+    }
+
+
+
+
+    public List<String> validarMateriaPrima (MateriaPrimaResponseDom materiaPrima) {
+        List<String> mensagens = new ArrayList<>();
         if (materiaPrima.getNome() == null || materiaPrima.getNome().equals("")){
             mensagens.add("Matéria prima não informada.");
         }
