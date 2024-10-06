@@ -67,7 +67,6 @@ public class MateriaPrimaService {
 
 
 
-
     public MateriaPrimaResponseDom carregarOSById(Long id) {
 
         Optional<MateriaPrima> result = materiaPrimaRepository.findById(id);
@@ -89,12 +88,6 @@ public class MateriaPrimaService {
 
         return null;
     }
-
-
-
-
-
-
 
 
     public MateriaPrimaResponseDom atualizarMateriaPrima( Long id, MateriaPrimaResponseDom materiaprima) throws CrudException {
@@ -127,6 +120,39 @@ public class MateriaPrimaService {
         }
         throw new CrudException("Matéria prima não encontrada com o ID: " + id);
     }
+
+
+
+
+    public MateriaPrimaResponseDom atualizarQtdeTotalMaterial( Long id, MateriaPrimaResponseDom materiaPrimaQtdes) throws CrudException {
+//        List<String> mensagens = this.validarMateriaPrima(materiaprima);
+//        if (!mensagens.isEmpty()){
+//            throw new CrudException(mensagens);
+//        }
+
+        Optional<MateriaPrima> result = materiaPrimaRepository.findById(id);
+
+        if (result.isPresent()) {
+            MateriaPrima materiaPrimaEntidade = result.get();
+
+            materiaPrimaEntidade.setComprimento(materiaPrimaQtdes.getComprimento());
+            materiaPrimaEntidade.setQtde(materiaPrimaQtdes.getQtde());
+            MateriaPrima materiaPrimaAtualizada = materiaPrimaRepository.save(materiaPrimaEntidade);
+
+            MateriaPrimaResponseDom materiaPrimaResponse = new  MateriaPrimaResponseDom();
+            materiaPrimaResponse.setId(materiaPrimaAtualizada.getId());
+            materiaPrimaResponse.setComprimento(materiaPrimaAtualizada.getComprimento());
+            materiaPrimaResponse.setQtde(materiaPrimaAtualizada.getQtde());
+
+
+            return materiaPrimaResponse;
+        }
+        throw new CrudException("Matéria prima não encontrada com o ID: " + id);
+    }
+
+
+
+
 
 
 
