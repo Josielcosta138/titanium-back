@@ -27,6 +27,7 @@ public class OrdemServicoResponseDom {
     private Integer numeorNotaFiscal;
     private String campoObservacao;
     private StatusOS status;
+
     private Cliente cliente;
     private List<OrdemDeCorte> gradeMateriaPrimaList;
     private List<OrdemCorteResponseDom> ordensDeCorte;

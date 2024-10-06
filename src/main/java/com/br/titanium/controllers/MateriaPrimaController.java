@@ -101,4 +101,24 @@ public class MateriaPrimaController {
         }
     }
 
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/atualizarQtdeTotalMateriaPrima/{id}")
+    public ResponseEntity<MateriaPrimaResponseDom> atualizarQtdeTotalMaterial(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom qtdeMateriaprima){
+        try {
+            MateriaPrimaResponseDom responseDOM = materiaPrimaService.atualizarQtdeTotalMaterial(id, qtdeMateriaprima);
+
+            if (responseDOM == null){
+                return ResponseEntity.badRequest().body(null);
+            }
+            return ResponseEntity.ok(responseDOM);
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
+
 }
