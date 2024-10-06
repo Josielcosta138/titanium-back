@@ -10,6 +10,7 @@ import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResquestDom;
 import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
+import com.br.titanium.useCases.materiaPrima.domains.MateriaPrimaResponseDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class OrdemServicoService {
     EnderecoRepository enderecoRepository;
     @Autowired
     ClienteRepository clienteRepository;
+
+
+    @Autowired
+    private MateriaPrimaService materiaPrimaService;
 
 
     public List<OrdemServicoResponseDom> carregarOS() {
@@ -94,8 +99,6 @@ public class OrdemServicoService {
             }
         return listaDeOrdemServico;
     }
-
-
 
     public OrdemServicoResponseDom carregarOSById(Long id) {
         Optional<OrdemServico> result = ordemServicoRepository.findById(id);
@@ -177,7 +180,6 @@ public class OrdemServicoService {
 
 
 
-
     public OrdemServicoResponseDom atualizarOrdemServico(Long id, OrdemServicoResponseDom os)throws CrudException{
 //        List<String>mensagens = this.validarCliente(cliente);
 //        if (!mensagens.isEmpty()){
@@ -223,12 +225,8 @@ public class OrdemServicoService {
 
             return responseDOM;
         }
-
-        // Caso a ordem de serviço não seja encontrada, lançar uma exceção
         throw new CrudException("Ordem de serviço não encontrada com o ID: " + id);
     }
-
-
 
 
     public OrdemServicoResponseDom atualizarStatusOs(Long id, OrdemServicoResponseDom os)throws CrudException{
@@ -253,6 +251,30 @@ public class OrdemServicoService {
             return responseDOM;
         }
         throw new CrudException("Ordem de serviço não encontrada com o ID: " + id);
+    }
+
+
+    public OrdemServicoResponseDom atualizarQtdesFalhaSobras(Long id, OrdemServicoResponseDom qtds)throws CrudException {
+
+        Optional<OrdemServico> resultado = ordemServicoRepository.findById(id);
+
+        if (resultado.isPresent()) {
+            OrdemServico ordemServicoEntidade = resultado.get();
+
+            ordemServicoEntidade.setQtdeMaterialFalhas(qtds.getQtdeMaterialFalhas());
+            ordemServicoEntidade.setQtdeMaterialRestante(qtds.getQtdeMaterialRestante());
+            OrdemServico qtdesAtualizadas = ordemServicoRepository.save(ordemServicoEntidade);
+
+            OrdemServicoResponseDom responseDOM = new OrdemServicoResponseDom();
+            responseDOM.setId(qtdesAtualizadas.getId());
+            responseDOM.setQtdeMaterialFalhas(qtdesAtualizadas.getQtdeMaterialFalhas());
+            responseDOM.setQtdeMaterialRestante(qtdesAtualizadas.getQtdeMaterialRestante());
+
+            return responseDOM;
+
+        }
+        throw new CrudException("Ordem de serviço não encontrada com o ID: " + id);
+
     }
 
 
@@ -315,6 +337,7 @@ public class OrdemServicoService {
 
         return mensagens;
     }
+
 
 
 }
