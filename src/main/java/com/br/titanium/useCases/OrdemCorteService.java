@@ -1,13 +1,11 @@
 package com.br.titanium.useCases;
 
-import com.br.titanium.entitys.Cliente;
 import com.br.titanium.entitys.MateriaPrima;
 import com.br.titanium.entitys.OrdemDeCorte;
 import com.br.titanium.entitys.OrdemServico;
 import com.br.titanium.repositorys.MateriaPrimaRepository;
 import com.br.titanium.repositorys.OrdemDeCorteRepository;
 import com.br.titanium.repositorys.OrdemServicoRepository;
-import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteRequestoDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OrdemCorteService {
@@ -44,6 +41,16 @@ public class OrdemCorteService {
         return ListaMateriaPrima;
 
     }
+
+
+
+    public int carregarTotalDeOrdens() {
+        List<OrdemDeCorte> ordensDeCorte = ordemDeCorteRepository.findAll();
+        int qtdeTotal = ordensDeCorte.size();
+        return qtdeTotal;
+    }
+
+
 
 
     public OrdemCorteResponseDom criarOrdemCorte(OrdemCorteRequestoDom ordemDeCorte) throws CrudException {
@@ -83,6 +90,7 @@ public class OrdemCorteService {
         return mensagens;
 
     }
+
 
 
 }

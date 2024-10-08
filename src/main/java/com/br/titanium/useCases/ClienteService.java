@@ -1,6 +1,7 @@
 package com.br.titanium.useCases;
 
 import com.br.titanium.entitys.Cliente;
+import com.br.titanium.entitys.OrdemDeCorte;
 import com.br.titanium.repositorys.ClienteRepository;
 import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
@@ -39,9 +40,19 @@ public class ClienteService {
 
             clientes.add(aux);
         }
-
         return clientes;
     }
+
+
+
+
+
+    public int carregarTotalDeClientes() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        int qtdeTotal = clientes.size();
+        return qtdeTotal;
+    }
+
 
 
 
@@ -68,7 +79,6 @@ public class ClienteService {
 
 
     private static final String API_URL = "https://www.receitaws.com.br/v1/cnpj/";
-
     public ClienteResponseDom carregarClienteApi(String cnpj) {
         try {
             // Realiza a chamada à API externa
@@ -100,7 +110,6 @@ public class ClienteService {
         }
         return null;
     }
-
 
 
 
@@ -185,4 +194,6 @@ public class ClienteService {
         }
         return mensagens;
     }
+
+
 }
