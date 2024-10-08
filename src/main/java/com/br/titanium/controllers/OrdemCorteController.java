@@ -41,6 +41,24 @@ public class OrdemCorteController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/carregarTotalDeOrdemCorte")
+    public ResponseEntity<Integer>carregarTotalDeOrdens(){
+        try {
+            int response = ordemCorteService.carregarTotalDeOrdens();
+            int status = 200;
+            if (response < 0){
+                status = 204;
+            }
+            return ResponseEntity.status(status).body(response);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
 
     @CrossOrigin(origins = "http://localhost:3001")
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
