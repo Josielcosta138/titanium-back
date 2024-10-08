@@ -339,5 +339,14 @@ public class OrdemServicoService {
     }
 
 
+    public BigDecimal carregarFaturamentoTotal() {
+        List<OrdemServico> valoresTotais = ordemServicoRepository.findAll();
+        BigDecimal qtdeTotal = (BigDecimal.ZERO);
 
+        for (OrdemServico valore : valoresTotais) {
+            qtdeTotal = qtdeTotal.add(valore.getValorTotal());
+        }
+
+        return qtdeTotal;
+    }
 }

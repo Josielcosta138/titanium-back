@@ -108,6 +108,23 @@ public class ClienteController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/carregarTotalDeClientes")
+    public ResponseEntity<Integer>carregarTotalDeClientes(){
+        try {
+            int response = clienteService.carregarTotalDeClientes();
+            int status = 200;
+            if (response < 0){
+                status = 204;
+            }
+            return ResponseEntity.status(status).body(response);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 
     @DeleteMapping("/excluirCliente/{id}")
     public ResponseEntity<Void> excluirCliente(@PathVariable Long id){
