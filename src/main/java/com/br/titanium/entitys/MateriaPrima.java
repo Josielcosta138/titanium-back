@@ -23,6 +23,11 @@ public class MateriaPrima {
     @Column(nullable = true)
     private String codReferencia;
 
+    @Column(nullable = false)
+    private Double qtdeMaterialFalhas;
+    @Column(nullable = false)
+    private Double qtdeMaterialRestante;
+
     @JsonIgnore
     @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrdemDeCorte> gradeMateriaPrimaList;
@@ -83,5 +88,21 @@ public class MateriaPrima {
 
     public void setGradeMateriaPrimaList(List<OrdemDeCorte> gradeMateriaPrimaList) {
         this.gradeMateriaPrimaList = gradeMateriaPrimaList;
+   }
+
+    public Double getQtdeMaterialFalhas() {
+        return qtdeMaterialFalhas;
+    }
+
+    public void setQtdeMaterialFalhas(Double qtdeMaterialFalhas) {
+        this.qtdeMaterialFalhas = qtdeMaterialFalhas;
+    }
+
+    public Double getQtdeMaterialRestante() {
+        return qtdeMaterialRestante;
+    }
+
+    public void setQtdeMaterialRestante(Double qtdeMaterialRestante) {
+        this.qtdeMaterialRestante = qtdeMaterialRestante;
     }
 }

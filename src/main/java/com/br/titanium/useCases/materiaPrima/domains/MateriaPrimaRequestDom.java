@@ -1,5 +1,7 @@
 package com.br.titanium.useCases.materiaPrima.domains;
 
+import jakarta.persistence.Column;
+
 public class MateriaPrimaRequestDom {
 
     private String nome;
@@ -7,7 +9,8 @@ public class MateriaPrimaRequestDom {
     private Double qtde;
     private Double largura;
     private String codReferencia;
-
+    private Double qtdeMaterialFalhas;
+    private Double qtdeMaterialRestante;
 
     public String getNome() {
         return nome;
@@ -48,4 +51,22 @@ public class MateriaPrimaRequestDom {
     public void setCodReferencia(String codReferencia) {
         this.codReferencia = codReferencia;
     }
+
+
+    public Double getQtdeMaterialFalhas() {
+        return qtdeMaterialFalhas;
+    }
+
+    public void setQtdeMaterialFalhas(Double qtdeMaterialFalhas) {
+        this.qtdeMaterialFalhas = qtdeMaterialFalhas;
+    }
+
+    public Double getQtdeMaterialRestante() {
+        return qtdeMaterialRestante;
+    }
+
+    public void setQtdeMaterialRestante(Double qtdeMaterialRestante) {
+        this.qtdeMaterialRestante = qtdeMaterialRestante;
+    }
 }
+
