@@ -83,23 +83,40 @@ public class MateriaPrimaController {
     }
 
 
-
-
     @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizarMateriaPrima/{id}")
-    public ResponseEntity<MateriaPrimaResponseDom> atualizarMateriaPrima(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom materiaprima){
+    public ResponseEntity<MateriaPrimaResponseDom> atualizarMateriaPrima(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom materiaprima) {
         try {
             MateriaPrimaResponseDom responseDOM = materiaPrimaService.atualizarMateriaPrima(id, materiaprima);
 
-            if (responseDOM == null){
+            if (responseDOM == null) {
                 return ResponseEntity.badRequest().body(null);
             }
             return ResponseEntity.ok(responseDOM);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/atualizarFalhasRestantes/{id}")
+    public ResponseEntity<MateriaPrimaResponseDom> atualizarQtdeFalhasRestantes(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom materiaprima) {
+        try {
+            MateriaPrimaResponseDom responseDOM = materiaPrimaService.atualizarQtdeFalhasRestantes(id, materiaprima);
+
+            if (responseDOM == null) {
+                return ResponseEntity.badRequest().body(null);
+            }
+            return ResponseEntity.ok(responseDOM);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
 
 
 
