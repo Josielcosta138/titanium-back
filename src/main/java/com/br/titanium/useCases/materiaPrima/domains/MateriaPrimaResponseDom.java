@@ -9,6 +9,8 @@ public class MateriaPrimaResponseDom {
     private Double qtde;
     private Double largura;
     private String codReferencia;
+    private Double qtdeMaterialFalhas;
+    private Double qtdeMaterialRestante;
 
     public long getId() {
         return id;
@@ -56,5 +58,21 @@ public class MateriaPrimaResponseDom {
 
     public void setCodReferencia(String codReferencia) {
         this.codReferencia = codReferencia;
+    }
+
+    public Double getQtdeMaterialRestante() {
+        return qtdeMaterialRestante;
+    }
+
+    public void setQtdeMaterialRestante(Double qtdeMaterialRestante) {
+        this.qtdeMaterialRestante = qtdeMaterialRestante;
+    }
+
+    public Double getQtdeMaterialFalhas() {
+        return qtdeMaterialFalhas;
+    }
+
+    public void setQtdeMaterialFalhas(Double qtdeMaterialFalhas) {
+        this.qtdeMaterialFalhas = qtdeMaterialFalhas;
     }
 }
