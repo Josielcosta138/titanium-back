@@ -1,11 +1,13 @@
 package com.br.titanium.useCases;
 import com.br.titanium.entitys.MateriaPrima;
+import com.br.titanium.entitys.OrdemServico;
 import com.br.titanium.repositorys.MateriaPrimaRepository;
 import com.br.titanium.useCases.materiaPrima.domains.MateriaPrimaResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +38,23 @@ public class MateriaPrimaService {
 
         return listaMateriaPrima;
     }
+
+
+
+
+    public Double carregarEconomiaDeMaterial() {
+        List<MateriaPrima> valoresTotais = materiaPrimaRepository.findAll();
+        Double qtdeTotal = 0.0;
+
+        for (MateriaPrima valore : valoresTotais) {
+            qtdeTotal += valore.getQtdeMaterialRestante();
+        }
+
+    return qtdeTotal;
+    }
+
+
+
 
     public MateriaPrimaResponseDom criarMateriaPrima(MateriaPrimaResponseDom materiaPrima) throws CrudException{
         List<String> mensagens = this.validarMateriaPrima(materiaPrima);
@@ -150,10 +169,6 @@ public class MateriaPrimaService {
 
 
 
-
-
-
-
     public MateriaPrimaResponseDom atualizarQtdeTotalMaterial( Long id, MateriaPrimaResponseDom materiaPrimaQtdes) throws CrudException {
 //        List<String> mensagens = this.validarMateriaPrima(materiaprima);
 //        if (!mensagens.isEmpty()){
@@ -161,7 +176,6 @@ public class MateriaPrimaService {
 //        }
 
         Optional<MateriaPrima> result = materiaPrimaRepository.findById(id);
-
         if (result.isPresent()) {
             MateriaPrima materiaPrimaEntidade = result.get();
 
@@ -181,6 +195,7 @@ public class MateriaPrimaService {
     }
 
 
+
     public List<String> validarMateriaPrima (MateriaPrimaResponseDom materiaPrima) {
         List<String> mensagens = new ArrayList<>();
         if (materiaPrima.getNome() == null || materiaPrima.getNome().equals("")){
@@ -188,7 +203,6 @@ public class MateriaPrimaService {
         }
         return mensagens;
     }
-
 
 
 }
