@@ -130,6 +130,39 @@ public class OrdemServicoService {
         return null;
     }
 
+
+
+    public List<OrdemServicoResponseDom> carregarOSByName(String name) {
+
+        List<OrdemServico> ListaDeNome = ordemServicoRepository.findAll();
+        List<OrdemServicoResponseDom> nomesResponse = new ArrayList<>();
+
+        for (OrdemServico response : ListaDeNome) {
+            if (response.getCliente().getRazaoSocial().toLowerCase().contains(name.toLowerCase())) {
+                OrdemServicoResponseDom ordemServicoResponseDom = new OrdemServicoResponseDom();
+
+                ordemServicoResponseDom.setId(response.getId());
+                ordemServicoResponseDom.setValorTotal(response.getValorTotal());
+                ordemServicoResponseDom.setDataEntrada(response.getDataEntrada());
+                ordemServicoResponseDom.setDataEntrega(response.getDataEntrega());
+                ordemServicoResponseDom.setQtdeMaterialFalhas(response.getQtdeMaterialFalhas());
+                ordemServicoResponseDom.setQtdeMaterialRestante(response.getQtdeMaterialRestante());
+                ordemServicoResponseDom.setQtdePecas(response.getQtdePecas());
+                ordemServicoResponseDom.setQtdeRolos(response.getQtdeRolos());
+                ordemServicoResponseDom.setValorPorPeca(response.getValorPorPeca());
+                ordemServicoResponseDom.setCliente(response.getCliente());
+                ordemServicoResponseDom.setCodReferenciaOs(response.getCodReferenciaOs());
+                ordemServicoResponseDom.setModelo(response.getModelo());
+                ordemServicoResponseDom.setNumeorNotaFiscal(response.getNumeorNotaFiscal());
+                ordemServicoResponseDom.setCampoObservacao(response.getCampoObservacao());
+                ordemServicoResponseDom.setStatus(response.getStatus());
+                nomesResponse.add(ordemServicoResponseDom);
+            }
+        }
+        return nomesResponse;
+    }
+
+
     public OrdemServicoResponseDom criarOrdemServico(OrdemServicoResquestDom ordemServico) throws CrudException {
 
         /* List<String>mensagens = this.validarOrdemServico(ordemServico);
@@ -177,7 +210,6 @@ public class OrdemServicoService {
 
         return ordemServicoResponseDom;
     }
-
 
 
     public OrdemServicoResponseDom atualizarOrdemServico(Long id, OrdemServicoResponseDom os)throws CrudException{
@@ -279,6 +311,19 @@ public class OrdemServicoService {
 
 
 
+    public BigDecimal carregarFaturamentoTotal() {
+        List<OrdemServico> valoresTotais = ordemServicoRepository.findAll();
+        BigDecimal qtdeTotal = (BigDecimal.ZERO);
+
+        for (OrdemServico valore : valoresTotais) {
+            qtdeTotal = qtdeTotal.add(valore.getValorTotal());
+        }
+
+        return qtdeTotal;
+    }
+
+
+
 
     private List<String> validarOrdemServico(OrdemServicoResquestDom ordemServico) {
         List<String> mensagens = new ArrayList<>();
@@ -339,14 +384,4 @@ public class OrdemServicoService {
     }
 
 
-    public BigDecimal carregarFaturamentoTotal() {
-        List<OrdemServico> valoresTotais = ordemServicoRepository.findAll();
-        BigDecimal qtdeTotal = (BigDecimal.ZERO);
-
-        for (OrdemServico valore : valoresTotais) {
-            qtdeTotal = qtdeTotal.add(valore.getValorTotal());
-        }
-
-        return qtdeTotal;
-    }
 }

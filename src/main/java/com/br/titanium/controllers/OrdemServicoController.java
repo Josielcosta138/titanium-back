@@ -41,8 +41,6 @@ public class OrdemServicoController {
 
 
 
-
-
     @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregarFaturamentoTotal")
     public ResponseEntity<BigDecimal>carregarFaturamentoTotal(){
@@ -62,15 +60,36 @@ public class OrdemServicoController {
 
 
 
-
-
-
     @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar/{id}")
     public ResponseEntity<OrdemServicoResponseDom> carregarEnderecosById(@PathVariable Long id){
 
         try {
             OrdemServicoResponseDom response = ordemServicoService.carregarOSById(id);
+
+            if (response != null){
+                return ResponseEntity.ok(response);
+            }
+            return ResponseEntity
+                    .status(204)
+                    .body(null);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity
+                    .badRequest()
+                    .body(null);
+        }
+    }
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/carregarNome/{nome}")
+    public ResponseEntity<List<OrdemServicoResponseDom>> carregarEnderecosByName(@PathVariable String nome){
+
+        try {
+            List<OrdemServicoResponseDom> response = ordemServicoService.carregarOSByName(nome);
 
             if (response != null){
                 return ResponseEntity.ok(response);
@@ -108,7 +127,6 @@ public class OrdemServicoController {
 
 
 
-
     @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizarOS/{id}")
     public ResponseEntity<OrdemServicoResponseDom> atualizarOS(@PathVariable Long id, @RequestBody OrdemServicoResponseDom os){
@@ -127,8 +145,6 @@ public class OrdemServicoController {
 
 
 
-
-
     @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizarStatusOs/{id}")
     public ResponseEntity<OrdemServicoResponseDom> atualizarStatusOs(@PathVariable Long id, @RequestBody OrdemServicoResponseDom statusOs){
@@ -144,7 +160,6 @@ public class OrdemServicoController {
             return ResponseEntity.badRequest().body(null);
         }
     }
-
 
 
 

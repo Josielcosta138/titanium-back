@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin
@@ -41,6 +42,28 @@ public class MateriaPrimaController {
 
 
 
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/carregarEconomiaDeMaterial")
+    public ResponseEntity<Double>carregarEconomiaDeMateriais(){
+        try {
+            Double response = materiaPrimaService.carregarEconomiaDeMaterial();
+            int status = 200;
+            if (response < 0){
+                status = 204;
+            }
+            return ResponseEntity.status(status).body(response);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
     @PostMapping("/criarMateriaPrima")
     public ResponseEntity<?> criarMateriaPrima(@RequestBody MateriaPrimaResponseDom materiaPrima){
         try {
@@ -56,7 +79,6 @@ public class MateriaPrimaController {
             return ResponseEntity.internalServerError().body(ResponseUtil.responseMap("Erro não mapeado" + e.getMessage()));
         }
     }
-
 
 
 
@@ -100,7 +122,6 @@ public class MateriaPrimaController {
 
 
 
-
     @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizarFalhasRestantes/{id}")
     public ResponseEntity<MateriaPrimaResponseDom> atualizarQtdeFalhasRestantes(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom materiaprima) {
@@ -115,8 +136,6 @@ public class MateriaPrimaController {
             return ResponseEntity.badRequest().body(null);
         }
     }
-
-
 
 
 
