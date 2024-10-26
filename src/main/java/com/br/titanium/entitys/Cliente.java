@@ -24,7 +24,6 @@ public class Cliente {
     private String cnpj;
 
 
-
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
