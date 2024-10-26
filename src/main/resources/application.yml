@@ -3,6 +3,9 @@
 server:
   port: 8085
 spring:
+  web:
+    resources:
+      add-mappings: false
   jpa:
     database: POSTGRESQL
     hibernate:
@@ -16,3 +19,7 @@ spring:
   mvc:
     consumes: application/json
     produces: application/json
+    throw-exception-if-no-handler-found: true
+  security:
+    secret: "exemplo-aula-jwt"
+    expiration_time: 1

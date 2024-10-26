@@ -1,13 +1,12 @@
 package com.br.titanium.entitys;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Cliente {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,22 +21,14 @@ public class Cliente {
     private String telefone;
     @Column(nullable = true)
     private String cnpj;
+    @Column(nullable = true)
+    private String login;
+    @Column(nullable = true)
+    private String senha;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EnderecoUsuario> enderecos;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos;
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrdemServico> ordensServico;
-
-
-    @JsonIgnore
-    public List<OrdemServico> getOrdensServico() {
-        return ordensServico;
-    }
-
-    public void setOrdensServico(List<OrdemServico> ordensServico) {
-        this.ordensServico = ordensServico;
-    }
 
     public Long getId() {
         return id;
@@ -87,13 +78,20 @@ public class Cliente {
         this.cnpj = cnpj;
     }
 
-    @JsonIgnore
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 
