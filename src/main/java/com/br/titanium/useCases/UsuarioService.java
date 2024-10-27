@@ -85,7 +85,6 @@ public class UsuarioService {
 
 
 
-
     public UsuarioLoginResponseDom recuperarToken(UsuarioLoginRequestDom usuarioLoginRequestDom) throws CrudException {
         Optional<Usuario> usuarioOptional = usuariosRepository.findByLogin(usuarioLoginRequestDom.getLogin());
         if (!usuarioOptional.isPresent()) {
@@ -178,6 +177,7 @@ public class UsuarioService {
             }
 
 
+
         Usuario usuariosEntidades = new Usuario();
             usuariosEntidades.setRazaoSocial(cliente.getRazaoSocial());
             usuariosEntidades.setNomeFantasia(cliente.getNomeFantasia());
@@ -211,18 +211,19 @@ public class UsuarioService {
             throw new CrudException(mensagens);
         }
 
-
         Optional<Usuario> resultado = usuariosRepository.findById(id).map(record -> {
+
             record.setRazaoSocial(usuario.getNomeFantasia());
             record.setNomeFantasia(usuario.getNomeFantasia());
             record.setEmail(usuario.getEmail());
-            record.setLogin(usuario.getLogin());
-            record.setSenha(usuario.getSenha());
             record.setTelefone(usuario.getTelefone());
             record.setCnpj(usuario.getCnpj());
-
             return usuariosRepository.save(record);
         });
+
+        if (resultado.isEmpty()){
+           throw new CrudException("Este cliente não existe!");
+        }
 
         if (resultado.isPresent()){
             Usuario usuarioEntidades = resultado.get();
@@ -234,13 +235,48 @@ public class UsuarioService {
             responseDOM.setEmail(usuarioEntidades.getEmail());
             responseDOM.setTelefone(usuarioEntidades.getTelefone());
             responseDOM.setCnpj(usuarioEntidades.getCnpj());
-            responseDOM.setSenha(usuarioEntidades.getSenha());
-            responseDOM.setLogin(usuarioEntidades.getLogin());
 
             return responseDOM;
         }
         return null;
     }
+
+
+
+
+    public UsuarioResponseDom recuperarSenha(Long id, UsuarioResponseDom usuario)throws CrudException{
+
+//        List<String>mensagens = this.validarUsuario(usuario);
+//        if (!mensagens.isEmpty()){
+//            throw new CrudException(mensagens);
+//        }
+        Optional<Usuario> resultado = usuariosRepository.findById(id).map(record -> {
+
+            String senhaCodificada = passwordEncoder.encode(usuario.getSenha());
+            record.setSenha(senhaCodificada);
+            record.setLogin(usuario.getLogin());
+            return usuariosRepository.save(record);
+        });
+        if (resultado.isEmpty()){
+            throw new CrudException("Este cliente não existe!");
+        }
+        if (resultado.isPresent()){
+            Usuario usuarioEntidades = resultado.get();
+
+            UsuarioResponseDom responseDOM = new UsuarioResponseDom();
+            responseDOM.setId(usuarioEntidades.getId());
+            responseDOM.setLogin(usuarioEntidades.getLogin());
+            responseDOM.setSenha(usuarioEntidades.getSenha());
+            return responseDOM;
+        }
+        return null;
+    }
+
+
+
+
+
+
 
 
     public void excluirUsuario(Long id){
