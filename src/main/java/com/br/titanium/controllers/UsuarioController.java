@@ -132,15 +132,14 @@ public class UsuarioController {
 
 
 
-
-
+    @CrossOrigin(origins = "http://localhost:3001")
     @PutMapping("/atualizarUsuarios/{id}")
     public ResponseEntity<UsuarioResponseDom> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioResponseDom usuarios){
         try {
             UsuarioResponseDom responseDOM = usuarioService.atualizarUsuarios(id, usuarios);
 
             if (responseDOM == null){
-                return ResponseEntity.badRequest().body(null);
+                return ResponseEntity.badRequest().body(responseDOM);
             }
             return ResponseEntity.ok(responseDOM);
         }
@@ -148,6 +147,28 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/recuperarSenha/{id}")
+    public ResponseEntity<UsuarioResponseDom> recuperarSenha(@PathVariable Long id, @RequestBody UsuarioResponseDom usuarios){
+        try {
+            UsuarioResponseDom responseDOM = usuarioService.recuperarSenha(id, usuarios);
+
+            if (responseDOM == null){
+                return ResponseEntity.badRequest().body(responseDOM);
+            }
+            return ResponseEntity.ok(responseDOM);
+        }
+        catch (Exception e){
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
 
 
 
