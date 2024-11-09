@@ -11,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3001")
 @Controller
@@ -57,6 +60,38 @@ public class OrdemServicoController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/carregarFaturamentoMensal")
+    public ResponseEntity<Map<Month, BigDecimal>> carregarFaturamentoMensal() {
+        try {
+            Map<Month, BigDecimal> response = ordemServicoService.carregarFaturamentoMensal();
+            int status = response.isEmpty() ? 204 : 200;
+            return ResponseEntity.status(status).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+
+
+    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/carregarEconomiaDeMaterialPorMes")
+    public ResponseEntity<Map<Month, BigDecimal>> carregarEconomiaDeMaterialPorMes() {
+        try {
+            Map<Month, BigDecimal> response = ordemServicoService.carregarTotalSobraMaterialPorMes();
+            int status = response.isEmpty() ? 204 : 200;
+            return ResponseEntity.status(status).body(response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 
 
 
