@@ -17,9 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.util.*;
 
 @Service
 public class OrdemServicoService {
@@ -320,6 +321,68 @@ public class OrdemServicoService {
         }
 
         return qtdeTotal;
+    }
+
+
+
+    public Map<Month, BigDecimal> carregarTotalSobraMaterialPorMes() {
+        List<OrdemServico> result = ordemServicoRepository.findAll();
+        List<OrdemServicoResponseDom> listaDeOrdemServico = new ArrayList<>();
+
+        for (OrdemServico ordemServico : result){
+            OrdemServicoResponseDom auxResponse = new OrdemServicoResponseDom();
+            auxResponse.setId(ordemServico.getId());
+            auxResponse.setDataEntrega(ordemServico.getDataEntrega());
+
+            List<OrdemDeCorte> ordensDeCorte = ordemDeCorteRepository.findByOrdemServicoId(ordemServico.getId());
+            List<OrdemCorteResponseDom> listaMateriaPrima = new ArrayList<>();
+
+            for (OrdemDeCorte ordemDeCorte : ordensDeCorte) {
+                OrdemCorteResponseDom ordemDeCorteResponseDom = new OrdemCorteResponseDom();
+                ordemDeCorteResponseDom.setId(ordemDeCorte.getId());
+                ordemDeCorteResponseDom.setMateriaPrima(ordemDeCorte.getMateriaPrima());
+                listaMateriaPrima.add(ordemDeCorteResponseDom);
+            }
+            auxResponse.setOrdensDeCorte(listaMateriaPrima);
+            listaDeOrdemServico.add(auxResponse);
+        }
+
+        Map<Month, BigDecimal> totaisDeMaterialMensal = new HashMap<>();
+        Year anoAtual = Year.now();
+
+        for (OrdemServicoResponseDom ordem : listaDeOrdemServico) {
+            LocalDate data = ordem.getDataEntrega();
+            if (data != null && data.getYear() == anoAtual.getValue()) {
+                Month mes = data.getMonth();
+                BigDecimal totalMensal = totaisDeMaterialMensal.getOrDefault(mes, BigDecimal.ZERO);
+
+                // Soma `qtdeMaterialRestante` para cada item na lista `ordensDeCorte`
+                for (OrdemCorteResponseDom corte : ordem.getOrdensDeCorte()) {
+                    totalMensal = totalMensal.add(BigDecimal.valueOf(corte.getMateriaPrima().getQtdeMaterialRestante()));
+                }
+                totaisDeMaterialMensal.put(mes, totalMensal);
+            }
+        }
+
+        return totaisDeMaterialMensal;
+    }
+
+
+
+    public Map<Month, BigDecimal> carregarFaturamentoMensal() {
+        List<OrdemServico> valoresTotais = ordemServicoRepository.findAll();
+        Map<Month, BigDecimal> faturamentoMensal = new HashMap<>();
+
+        Year anoAtual = Year.now();
+
+        for (OrdemServico ordem : valoresTotais) {
+            LocalDate data = ordem.getDataEntrega();
+            if (data != null && data.getYear() == anoAtual.getValue()) {
+                Month mes = data.getMonth();
+                faturamentoMensal.put(mes, faturamentoMensal.getOrDefault(mes, BigDecimal.ZERO).add(ordem.getValorTotal()));
+            }
+        }
+        return faturamentoMensal;
     }
 
 

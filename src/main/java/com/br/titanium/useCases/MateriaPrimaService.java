@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.*;
 
 @Service
 public class MateriaPrimaService {
@@ -52,6 +52,7 @@ public class MateriaPrimaService {
 
     return qtdeTotal;
     }
+
 
 
 
