@@ -6,6 +6,7 @@ import com.br.titanium.useCases.OrdemServicoService;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class OrdemServicoController {
 
     @Autowired
     private OrdemServicoService ordemServicoService;
+
 
 
     @CrossOrigin(origins = "http://localhost:3001")
@@ -215,7 +217,20 @@ public class OrdemServicoController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:3001")
+    @PutMapping("/enviarEmail/{id}")
+    public ResponseEntity<?> finalizarOrdemServico(@PathVariable Long id) {
 
+        String clienteEmail = "cjosiel2@gmail.com";
+        String clienteNome = "Josiel";
+
+        String assunto = "Sua Ordem de Serviço Está Pronta!";
+        String mensagem = "Olá " + clienteNome + ", sua ordem de serviço já está pronta para ser retirada!";
+
+        // Enviar o e-mail
+        ordemServicoService.enviarEmail(clienteEmail, assunto, mensagem);
+        return ResponseEntity.ok("Ordem de Serviço finalizada e e-mail enviado.");
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.br.titanium.useCases;
 
 
+import ch.qos.logback.classic.Logger;
 import com.br.titanium.entitys.*;
 import com.br.titanium.repositorys.ClienteRepository;
 import com.br.titanium.repositorys.EnderecoRepository;
@@ -8,12 +9,12 @@ import com.br.titanium.repositorys.OrdemDeCorteRepository;
 import com.br.titanium.repositorys.OrdemServicoRepository;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResquestDom;
-import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
-import com.br.titanium.useCases.materiaPrima.domains.MateriaPrimaResponseDom;
 import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -33,6 +34,9 @@ public class OrdemServicoService {
     EnderecoRepository enderecoRepository;
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
 
     @Autowired
@@ -383,6 +387,18 @@ public class OrdemServicoService {
             }
         }
         return faturamentoMensal;
+    }
+
+
+    public void enviarEmail(String para, String assunto, String mensagem) {
+
+
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(para);
+        email.setSubject(assunto);
+        email.setText(mensagem);
+
+        mailSender.send(email);
     }
 
 
