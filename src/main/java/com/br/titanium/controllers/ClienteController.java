@@ -1,6 +1,7 @@
 package com.br.titanium.controllers;
 
 import com.br.titanium.useCases.ClienteService;
+import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/cliente")
 public class ClienteController {
@@ -19,7 +20,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar")
     public ResponseEntity<List<ClienteResponseDom>> carregarClientes() {
         try {
@@ -37,7 +38,7 @@ public class ClienteController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar/{id}")
     public  ResponseEntity<ClienteResponseDom> carregarClientesById(@PathVariable Long id){
         try {
@@ -54,7 +55,7 @@ public class ClienteController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarDadosApis/{cnpj}")
     public ResponseEntity<ClienteResponseDom> carregarClientesViaApi(@PathVariable String cnpj) {
         try {
@@ -71,7 +72,7 @@ public class ClienteController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping(value = "/criarClientes", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarCliente(@RequestBody ClienteResponseDom cliente){
         try {
@@ -91,7 +92,7 @@ public class ClienteController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarCliente/{id}")
     public ResponseEntity<ClienteResponseDom> atualizarCliente(@PathVariable Long id, @RequestBody ClienteResponseDom cliente){
         try {
@@ -108,7 +109,7 @@ public class ClienteController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarTotalDeClientes")
     public ResponseEntity<Integer>carregarTotalDeClientes(){
         try {
@@ -124,6 +125,8 @@ public class ClienteController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+
 
 
     @DeleteMapping("/excluirCliente/{id}")

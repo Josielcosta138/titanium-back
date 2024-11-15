@@ -1,7 +1,6 @@
 package com.br.titanium.useCases;
 
 
-import ch.qos.logback.classic.Logger;
 import com.br.titanium.entitys.*;
 import com.br.titanium.repositorys.ClienteRepository;
 import com.br.titanium.repositorys.EnderecoRepository;
@@ -37,7 +36,6 @@ public class OrdemServicoService {
 
     @Autowired
     private JavaMailSender mailSender;
-
 
     @Autowired
     private MateriaPrimaService materiaPrimaService;
@@ -391,7 +389,6 @@ public class OrdemServicoService {
 
 
     public void enviarEmail(String para, String assunto, String mensagem) {
-
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(para);

@@ -2,7 +2,9 @@ package com.br.titanium.useCases;
 
 import com.br.titanium.entitys.Cliente;
 import com.br.titanium.entitys.OrdemDeCorte;
+import com.br.titanium.entitys.OrdemServico;
 import com.br.titanium.repositorys.ClienteRepository;
+import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
 import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
 import com.br.titanium.utils.CrudException;
@@ -74,8 +76,6 @@ public class ClienteService {
         }
         return null;
     }
-
-
 
 
     private static final String API_URL = "https://www.receitaws.com.br/v1/cnpj/";

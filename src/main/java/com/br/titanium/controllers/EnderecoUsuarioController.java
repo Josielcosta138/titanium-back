@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/enderecoUsuario")
 public class EnderecoUsuarioController {
@@ -24,7 +24,7 @@ public class EnderecoUsuarioController {
     @Autowired
     private EnderecoUsuarioService enderecoUsuarioService;
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar")
     public ResponseEntity<List<EnderecoUsuarioResponseDom>> carregarEnderecos(){
         try {
@@ -46,7 +46,7 @@ public class EnderecoUsuarioController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar/{id}")
     public ResponseEntity<EnderecoUsuarioResponseDom> carregarEnderecosById(@PathVariable Long id){
 
@@ -70,7 +70,7 @@ public class EnderecoUsuarioController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregaEnderecosIdCliente/{id}")
     public ResponseEntity<List<EnderecoUsuarioResponseDom>> carregarEnderecosByIdCliente(@PathVariable Long id){
 
@@ -91,7 +91,7 @@ public class EnderecoUsuarioController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarEndereco(@RequestBody EnderecoUsuarioRequestDom endereco){
         try {
@@ -110,7 +110,7 @@ public class EnderecoUsuarioController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<EnderecoUsuarioResponseDom> atualizarEndereco(@PathVariable Long id, @RequestBody EnderecoUsuarioRequestDom endereco) {
         try {
@@ -126,7 +126,7 @@ public class EnderecoUsuarioController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<Void> excluirEndereco(@PathVariable Long id){
         try {

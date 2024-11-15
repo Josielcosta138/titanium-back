@@ -6,6 +6,7 @@ import com.br.titanium.entitys.Endereco;
 import com.br.titanium.repositorys.CidadeRepository;
 import com.br.titanium.repositorys.ClienteRepository;
 import com.br.titanium.repositorys.EnderecoRepository;
+import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
 import com.br.titanium.utils.CrudException;
@@ -48,6 +49,34 @@ public class EnderecoService {
 
         return listaDeEnderecos;
     }
+
+
+
+    public List<EnderecoResponseDom> carregarClienteByName(String name) {
+
+        List<Endereco> ListaDeNome = enderecoRepository.findAll();
+        List<EnderecoResponseDom> nomesResponse = new ArrayList<>();
+
+        for (Endereco response : ListaDeNome) {
+            if (response.getCliente().getNomeFantasia().toLowerCase().contains(name.toLowerCase())) {
+
+                EnderecoResponseDom aux = new EnderecoResponseDom();
+                aux.setId(response.getId());
+                aux.setRua(response.getRua());
+                aux.setBairro(response.getBairro());
+                aux.setCidadeId(response.getCidade().getId());
+                aux.setClienteId(response.getCliente().getId());
+                aux.setClient(response.getCliente());
+                aux.setCidades(response.getCidade());
+
+                nomesResponse.add(aux);
+            }
+        }
+        return nomesResponse;
+    }
+
+
+
 
 
     public EnderecoResponseDom carregarEnderecosById(Long id){

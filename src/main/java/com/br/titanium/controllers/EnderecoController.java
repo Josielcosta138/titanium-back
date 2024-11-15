@@ -2,6 +2,7 @@ package com.br.titanium.controllers;
 
 
 import com.br.titanium.useCases.EnderecoService;
+import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
 import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
 import com.br.titanium.utils.CrudException;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/endereco")
 public class EnderecoController {
@@ -21,7 +22,7 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar")
     public ResponseEntity<List<EnderecoResponseDom>> carregarEnderecos(){
         try {
@@ -43,7 +44,34 @@ public class EnderecoController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
+
+    @GetMapping("/carregarNome/{nome}")
+    public ResponseEntity<List<EnderecoResponseDom>> carregarEnderecosByName(@PathVariable String nome){
+
+        try {
+            List<EnderecoResponseDom> response = enderecoService.carregarClienteByName(nome);
+
+            if (response != null){
+                return ResponseEntity.ok(response);
+            }
+            return ResponseEntity
+                    .status(204)
+                    .body(null);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity
+                    .badRequest()
+                    .body(null);
+        }
+    }
+
+
+
+
+
+
     @GetMapping("/carregar/{id}")
     public ResponseEntity<EnderecoResponseDom> carregarEnderecosById(@PathVariable Long id){
 
@@ -67,7 +95,7 @@ public class EnderecoController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregaEnderecosIdCliente/{id}")
     public ResponseEntity<List<EnderecoResponseDom>> carregarEnderecosByIdCliente(@PathVariable Long id){
 
@@ -88,7 +116,7 @@ public class EnderecoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarEndereco(@RequestBody EnderecoRequestDom endereco){
         try {
@@ -107,7 +135,7 @@ public class EnderecoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<EnderecoResponseDom> atualizarEndereco(@PathVariable Long id, @RequestBody EnderecoRequestDom endereco) {
         try {
@@ -123,7 +151,7 @@ public class EnderecoController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<Void> excluirEndereco(@PathVariable Long id){
         try {

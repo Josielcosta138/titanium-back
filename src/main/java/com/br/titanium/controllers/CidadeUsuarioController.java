@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/cidadeUsuario")
 public class CidadeUsuarioController {
@@ -45,7 +45,7 @@ public class CidadeUsuarioController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping("/criarCidade")
     public ResponseEntity<?> criarCidade(@RequestBody CidadeUsuarioResponseDom cidade){
         try {
@@ -63,7 +63,7 @@ public class CidadeUsuarioController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarCidade/{id}")
     public ResponseEntity<CidadeUsuarioResponseDom> atualizarCidade(@PathVariable Long id, @RequestBody CidadeUsuarioRequestDom cidade){
         try {

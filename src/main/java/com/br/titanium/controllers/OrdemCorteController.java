@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/ordemCorte")
 public class OrdemCorteController {
@@ -23,7 +23,7 @@ public class OrdemCorteController {
     private OrdemCorteService ordemCorteService;
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarMateriaPrimaByOrdemCorte/{id}")
     public ResponseEntity<List<OrdemCorteResponseDom>> carregarEnderecos(@PathVariable Long id){
         try {
@@ -41,7 +41,7 @@ public class OrdemCorteController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarTotalDeOrdemCorte")
     public ResponseEntity<Integer>carregarTotalDeOrdens(){
         try {
@@ -60,7 +60,7 @@ public class OrdemCorteController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarOrdemcorte(@RequestBody OrdemCorteRequestoDom ordemDeCorte){
         try {
