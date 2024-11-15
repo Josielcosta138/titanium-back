@@ -6,18 +6,16 @@ import com.br.titanium.useCases.OrdemServicoService;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.Month;
-import java.time.YearMonth;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/ordemServico")
 public class OrdemServicoController {
@@ -27,7 +25,6 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
     @GetMapping("/carregar")
     public ResponseEntity<List<OrdemServicoResponseDom>> carregarEnderecos(){
         try {
@@ -46,7 +43,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarFaturamentoTotal")
     public ResponseEntity<BigDecimal>carregarFaturamentoTotal(){
         try {
@@ -65,7 +62,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarFaturamentoMensal")
     public ResponseEntity<Map<Month, BigDecimal>> carregarFaturamentoMensal() {
         try {
@@ -80,7 +77,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarEconomiaDeMaterialPorMes")
     public ResponseEntity<Map<Month, BigDecimal>> carregarEconomiaDeMaterialPorMes() {
         try {
@@ -97,7 +94,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar/{id}")
     public ResponseEntity<OrdemServicoResponseDom> carregarEnderecosById(@PathVariable Long id){
 
@@ -121,7 +118,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarNome/{nome}")
     public ResponseEntity<List<OrdemServicoResponseDom>> carregarEnderecosByName(@PathVariable String nome){
 
@@ -145,7 +142,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarOrdemServico(@RequestBody OrdemServicoResquestDom ordemServico){
         try {
@@ -164,7 +161,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarOS/{id}")
     public ResponseEntity<OrdemServicoResponseDom> atualizarOS(@PathVariable Long id, @RequestBody OrdemServicoResponseDom os){
         try {
@@ -182,7 +179,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarStatusOs/{id}")
     public ResponseEntity<OrdemServicoResponseDom> atualizarStatusOs(@PathVariable Long id, @RequestBody OrdemServicoResponseDom statusOs){
         try {
@@ -200,7 +197,7 @@ public class OrdemServicoController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarQtdesFalhasSobras/{id}")
     public ResponseEntity<OrdemServicoResponseDom> atualizarQtdesFalhasSobras(@PathVariable Long id, @RequestBody OrdemServicoResponseDom qtdes){
         try {
@@ -217,7 +214,7 @@ public class OrdemServicoController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/enviarEmail/{id}")
     public ResponseEntity<?> finalizarOrdemServico(@PathVariable Long id) {
 

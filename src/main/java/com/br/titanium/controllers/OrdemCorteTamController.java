@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/ordemCorteTamanho")
 public class OrdemCorteTamController {
@@ -24,7 +24,7 @@ public class OrdemCorteTamController {
     private OrdemCorteTamService ordemCorteTamService;
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping(value = "/criar", consumes = "application/json;charset=UTF-8")
     public ResponseEntity<?> criarOrdemcorteTam(@RequestBody OrdemCorteTamRequesteDom ordemDeCortetAM){
         try {

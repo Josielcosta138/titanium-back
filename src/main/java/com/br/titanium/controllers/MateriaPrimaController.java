@@ -45,7 +45,7 @@ public class MateriaPrimaController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregarEconomiaDeMaterial")
     public ResponseEntity<Double>carregarEconomiaDeMateriais(){
         try {
@@ -67,7 +67,7 @@ public class MateriaPrimaController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping("/criarMateriaPrima")
     public ResponseEntity<?> criarMateriaPrima(@RequestBody MateriaPrimaResponseDom materiaPrima){
         try {
@@ -86,7 +86,7 @@ public class MateriaPrimaController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @GetMapping("/carregar/{id}")
     public ResponseEntity<MateriaPrimaResponseDom> carregarMateriaPrimaById(@PathVariable Long id){
 
@@ -109,7 +109,7 @@ public class MateriaPrimaController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarMateriaPrima/{id}")
     public ResponseEntity<MateriaPrimaResponseDom> atualizarMateriaPrima(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom materiaprima) {
         try {
@@ -126,7 +126,7 @@ public class MateriaPrimaController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarFalhasRestantes/{id}")
     public ResponseEntity<MateriaPrimaResponseDom> atualizarQtdeFalhasRestantes(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom materiaprima) {
         try {
@@ -143,7 +143,7 @@ public class MateriaPrimaController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarQtdeTotalMateriaPrima/{id}")
     public ResponseEntity<MateriaPrimaResponseDom> atualizarQtdeTotalMaterial(@PathVariable Long id, @RequestBody MateriaPrimaResponseDom qtdeMateriaprima){
         try {

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin
 @Controller
 @RequestMapping("/titanium/usuarios")
 public class UsuarioController {
@@ -62,7 +62,7 @@ public class UsuarioController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping("/autenticar")
     public ResponseEntity<?> autenticarUsuario(@RequestBody UsuarioLoginRequestDom usuario) {
         try {
@@ -80,7 +80,7 @@ public class UsuarioController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PostMapping("/recuperarAutenticacao")
     public ResponseEntity<?> recuperarAutenticacao(@RequestBody UsuarioLoginRequestDom usuario) {
         try {
@@ -132,7 +132,7 @@ public class UsuarioController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/atualizarUsuarios/{id}")
     public ResponseEntity<UsuarioResponseDom> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioResponseDom usuarios){
         try {
@@ -152,7 +152,7 @@ public class UsuarioController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:3001")
+
     @PutMapping("/recuperarSenha/{id}")
     public ResponseEntity<UsuarioResponseDom> recuperarSenha(@PathVariable Long id, @RequestBody UsuarioResponseDom usuarios){
         try {
