@@ -16,7 +16,7 @@ spring:
     produces: application/json
     throw-exception-if-no-handler-found: true
   security:
-    secret: ${JWT_SECRET:default-secret}
+    secret: ${JWT_SECRET}
     expiration_time: 240
   mail:
     host: smtp.gmail.com
