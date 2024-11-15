@@ -1,0 +1,31 @@
+
+
+server:
+  port: ${PORT:8080}
+spring:
+  web:
+    resources:
+      add-mappings: false
+  datasource:
+    url: ${DABASE_URL}
+    username: ${DABASE_USERNAME}
+    password: ${DABASE_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  mvc:
+    consumes: application/json
+    produces: application/json
+    throw-exception-if-no-handler-found: true
+  security:
+    secret: ${JWT_SECRET:default-secret}
+    expiration_time: 240
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
