@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .exceptionHandling(e->e.accessDeniedHandler(customAcessDeniedHandler).authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/titanium/usuarios/autenticar").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/titanium/usuarios/criarUsuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/titanium/usuarios/criarUsuarios").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
