@@ -221,8 +221,15 @@ public class OrdemServicoController {
         String clienteEmail = "cjosiel2@gmail.com";
         String clienteNome = "Josiel";
 
-        String assunto = "Sua Ordem de Serviço Está Pronta!";
-        String mensagem = "Olá " + clienteNome + ", sua ordem de serviço já está pronta para ser retirada!";
+        String assunto = "Sua ordem de serviço está pronta!";
+
+        String mensagem = "Olá, " + clienteNome + "!\n"
+                + "Sua ordem de serviço já está pronta para retirada. 🎉\n"
+                + "\n"
+                + "Agradecemos imensamente por escolher e confiar no nosso trabalho. \n"
+                + "Será um prazer atendê-lo novamente em sua próxima necessidade. ⭐ \n"
+                + "\n"
+                + "Até breve! 😊";
 
         // Enviar o e-mail
         ordemServicoService.enviarEmail(clienteEmail, assunto, mensagem);
