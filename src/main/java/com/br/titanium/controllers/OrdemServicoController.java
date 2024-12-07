@@ -1,8 +1,8 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
-import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResquestDom;
-import com.br.titanium.useCases.OrdemServicoService;
+import com.br.titanium.useCases.domains.OrdemServicoResponseDom;
+import com.br.titanium.useCases.domains.OrdemServicoResquestDom;
+import com.br.titanium.useCases.services.OrdemServicoService;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
