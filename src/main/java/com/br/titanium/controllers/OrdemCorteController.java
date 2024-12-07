@@ -1,10 +1,8 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.useCases.OrdemCorteService;
-import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
-import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
-import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteRequestoDom;
-import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
+import com.br.titanium.useCases.services.OrdemCorteService;
+import com.br.titanium.useCases.domains.OrdemCorteRequestoDom;
+import com.br.titanium.useCases.domains.OrdemCorteResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
