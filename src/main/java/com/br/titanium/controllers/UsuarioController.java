@@ -1,13 +1,9 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.entitys.Usuario;
-import com.br.titanium.useCases.ClienteService;
-import com.br.titanium.useCases.Usuario.domains.UsuarioLoginRequestDom;
-import com.br.titanium.useCases.Usuario.domains.UsuarioLoginResponseDom;
-import com.br.titanium.useCases.Usuario.domains.UsuarioRequestDom;
-import com.br.titanium.useCases.Usuario.domains.UsuarioResponseDom;
-import com.br.titanium.useCases.UsuarioService;
-import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
+import com.br.titanium.useCases.domains.UsuarioLoginRequestDom;
+import com.br.titanium.useCases.domains.UsuarioLoginResponseDom;
+import com.br.titanium.useCases.domains.UsuarioResponseDom;
+import com.br.titanium.useCases.services.UsuarioService;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;

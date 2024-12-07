@@ -1,9 +1,7 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.useCases.MateriaPrimaService;
-import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
-import com.br.titanium.useCases.materiaPrima.domains.MateriaPrimaResponseDom;
-import com.br.titanium.useCases.ordemCorte.domains.OrdemCorteResponseDom;
+import com.br.titanium.useCases.services.MateriaPrimaService;
+import com.br.titanium.useCases.domains.MateriaPrimaResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.time.YearMonth;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin
 @Controller

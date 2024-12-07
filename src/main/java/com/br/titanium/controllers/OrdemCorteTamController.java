@@ -1,8 +1,10 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.useCases.OrdemCorteTamService;
-import com.br.titanium.useCases.ordemCorteTam.domains.OrdemCorteTamRequesteDom;
-import com.br.titanium.useCases.ordemCorteTam.domains.OrdemCorteTamResponseDom;
+import com.br.titanium.useCases.domains.OrdemCorteTamRequesteDom;
+import com.br.titanium.useCases.domains.OrdemCorteTamResponseDom;
+import com.br.titanium.useCases.services.OrdemCorteTamService;
+import com.br.titanium.useCases.domains.domains.OrdemCorteTamRequesteDom;
+import com.br.titanium.useCases.domains.domains.OrdemCorteTamResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;

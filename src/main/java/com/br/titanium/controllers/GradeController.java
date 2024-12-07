@@ -1,8 +1,7 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.entitys.Grade;
-import com.br.titanium.useCases.GradeService;
-import com.br.titanium.useCases.grade.domains.GradeResponseDom;
+import com.br.titanium.useCases.services.GradeService;
+import com.br.titanium.useCases.domains.GradeResponseDom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

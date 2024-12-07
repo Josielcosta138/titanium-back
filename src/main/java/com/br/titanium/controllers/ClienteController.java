@@ -1,12 +1,10 @@
 package com.br.titanium.controllers;
 
-import com.br.titanium.useCases.ClienteService;
-import com.br.titanium.useCases.OrdemServico.domains.OrdemServicoResponseDom;
-import com.br.titanium.useCases.cliente.domains.ClienteResponseDom;
+import com.br.titanium.useCases.services.ClienteService;
+import com.br.titanium.useCases.domains.ClienteResponseDom;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
