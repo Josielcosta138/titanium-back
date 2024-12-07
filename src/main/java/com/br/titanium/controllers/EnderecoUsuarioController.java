@@ -1,12 +1,9 @@
 package com.br.titanium.controllers;
 
 
-import com.br.titanium.entitys.EnderecoUsuario;
-import com.br.titanium.useCases.EnderecoUsuario.domains.EnderecoUsuarioRequestDom;
-import com.br.titanium.useCases.EnderecoUsuario.domains.EnderecoUsuarioResponseDom;
-import com.br.titanium.useCases.EnderecoUsuarioService;
-import com.br.titanium.useCases.endereco.domains.EnderecoRequestDom;
-import com.br.titanium.useCases.endereco.domains.EnderecoResponseDom;
+import com.br.titanium.useCases.domains.EnderecoUsuarioRequestDom;
+import com.br.titanium.useCases.domains.EnderecoUsuarioResponseDom;
+import com.br.titanium.useCases.services.EnderecoUsuarioService;
 import com.br.titanium.utils.CrudException;
 import com.br.titanium.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
